@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafaf9;
+  --surface: #ffffff;
+  --foreground: #14140f;
+  --muted: #6b6b62;
+  --border: #e6e4dc;
+
+  /* Your accent — swap this to reskin the whole site */
+  --accent: #fe5e1f;
+  --accent-foreground: #ffffff;
+  /* Second stop used for gradients paired with --accent */
+  --accent-2: #ff2f7e;
+
+  /* Dark surface used for the hero + closing section, echoing the PDF cover/"bedankt" pages */
+  --ink: #14120f;
+  --ink-foreground: #f6f3ee;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-2: var(--accent-2);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+}
+
+/* Scrolling is handled by Lenis (see SmoothScroll.tsx) instead of native
+   CSS smooth-scroll, so the two don't fight each other. */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Hollow / see-through hero text: the fill is transparent so the animated
+   gradient sitting behind it shows through the letterforms, with a thin
+   solid stroke so they still read clearly against the dark hero. This is
+   the effect from the "port-folio" cover page, rebuilt for the web. */
+.hollow-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink-foreground);
+  text-stroke: 1.5px var(--ink-foreground);
+}
+
+.gradient-blob {
+  background: radial-gradient(
+      45% 45% at 30% 30%,
+      var(--accent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(50% 50% at 70% 60%, var(--accent-2) 0%, transparent 70%),
+    var(--ink);
+  background-size: 160% 160%, 160% 160%, 100% 100%;
+  animation: drift 14s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 0 0;
+  }
+  50% {
+    background-position: 60% 40%, 30% 60%, 0 0;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-blob {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
