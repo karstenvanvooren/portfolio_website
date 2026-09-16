@@ -112,7 +112,7 @@ export default function Home() {
 
         {/* How I work */}
         <SplitSection label="How I work">
-          <div className="flex flex-col">
+          <div id="how-i-work" className="flex scroll-mt-24 flex-col">
             {processSteps.map((step, i) => (
               <Reveal key={step.title} delay={i * 0.06}>
                 <ListRow

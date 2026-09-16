@@ -9,10 +9,11 @@ const DOT_COLOR = "254, 94, 31"; // --accent, matches the hero's dot grid
 
 const FORM_MS = 550; // dots pop in to form the K, inside-out
 const HOLD_MS = 200; // K sits still for a beat
-const BURST_MS = 550; // dots fly outward from the K and fade
+const BURST_MS = 700; // dots fly outward from the K and fade
 const EXIT_MS = 350; // whole overlay fades to reveal the page
 
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
+const easeInCubic = (t: number) => t * t * t;
 
 type Dot = {
   x: number;
@@ -127,10 +128,10 @@ export default function Preloader() {
             0,
             Math.min(1, (elapsed - FORM_MS - HOLD_MS) / BURST_MS)
           );
-          const eased = easeOutCubic(t);
+          const eased = easeOutQuint(t);
           dx = dot.dirX * eased * burstDistance;
           dy = dot.dirY * eased * burstDistance;
-          opacity = 1 - Math.min(1, t * 1.3);
+          opacity = 1 - easeInCubic(t);
           scale = 1 + eased * 0.6;
         }
 

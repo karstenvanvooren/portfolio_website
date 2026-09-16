@@ -1,18 +1,15 @@
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
-import DotGrid from "@/components/DotGrid";
 import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
-    // Bold, full-bleed closing moment — a nod to the "bedankt!" page in
-    // your PDF portfolio, rebuilt as a proper contact page. Same
-    // cursor-reactive dot grid as the hero, for the same reason: this is
-    // the other "big statement" section on the site.
-    <div className="relative isolate flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-background px-6 py-20 text-center text-foreground sm:px-10">
-      <DotGrid />
-
-      <div className="relative mx-auto w-full max-w-xl">
+    // A nod to the "bedankt!" page in your PDF portfolio, rebuilt as a
+    // proper contact page. Kept plain (no dot grid/gradient) — this page
+    // has a real form people need to read and fill in, and the animated
+    // background made that harder rather than more interesting.
+    <div className="flex min-h-[80vh] flex-col items-center justify-center bg-background px-6 py-20 text-center text-foreground sm:px-10">
+      <div className="mx-auto w-full max-w-xl">
         <Reveal>
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
             Get in touch

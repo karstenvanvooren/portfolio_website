@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
+import ListRow from "@/components/ListRow";
 import { getProject, projects } from "@/data/projects";
 
 export function generateStaticParams() {
@@ -86,13 +87,24 @@ export default async function CaseStudyPage({
 
           <Reveal className="mb-12">
             <h2 className="font-display text-xl font-semibold tracking-tight">Process</h2>
-            <ul className="mt-3 space-y-3">
+            <p className="mt-2 text-sm text-muted">
+              The same steps from{" "}
+              <Link href="/#how-i-work" className="link-underline text-foreground">
+                how I work
+              </Link>
+              , applied here.
+            </p>
+            <div className="mt-4 flex flex-col">
               {project.process.map((step, i) => (
-                <li key={i} className="leading-relaxed text-muted">
-                  {step}
-                </li>
+                <ListRow
+                  key={step.step}
+                  index={`0${i + 1}`}
+                  title={step.step}
+                  description={step.description}
+                  details={step.details}
+                />
               ))}
-            </ul>
+            </div>
           </Reveal>
 
           <Reveal className="mb-12">
