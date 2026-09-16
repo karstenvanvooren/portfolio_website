@@ -3,18 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SPACING = 34;
-const RADIUS = 2.2;
+const SPACING = 16;
+const RADIUS = 2.4;
 const DOT_COLOR = "254, 94, 31"; // --accent, matches the hero's dot grid
-const REVEAL_MS = 650;
-const HOLD_MS = 200;
-const EXIT_MS = 400;
+
+const FORM_MS = 550; // dots pop in to form the K, inside-out
+const HOLD_MS = 200; // K sits still for a beat
+const BURST_MS = 550; // dots fly outward from the K and fade
+const EXIT_MS = 350; // whole overlay fades to reveal the page
+
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+type Dot = {
+  x: number;
+  y: number;
+  dirX: number;
+  dirY: number;
+  formDelay: number;
+  formDuration: number;
+};
 
 // A brief branded loading screen on first paint (page open/refresh), not
 // on client-side navigations — it lives in the root layout and only ever
-// mounts once per real page load. A ring of dots ripples out from the
-// center to fill the screen (the hero's dot grid, at rest), holds for a
-// beat, then the whole thing fades to reveal the page.
+// mounts once per real page load. Dots pop in to form a "K", hold for a
+// beat, then burst outward and fade as the page underneath is revealed.
 export default function Preloader() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [visible, setVisible] = useState(true);
@@ -41,43 +53,102 @@ export default function Preloader() {
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const cols = Math.ceil(width / SPACING) + 1;
-    const rows = Math.ceil(height / SPACING) + 1;
     const cx = width / 2;
     const cy = height / 2;
-    const maxDist = Math.hypot(cx, cy) || 1;
 
+    // Render a big "K" offscreen, then sample it on the dot grid: any grid
+    // point landing on an opaque pixel becomes one of the letter's dots.
+    const mask = document.createElement("canvas");
+    mask.width = width;
+    mask.height = height;
+    const mctx = mask.getContext("2d")!;
+    mctx.fillStyle = "#000";
+    mctx.textAlign = "center";
+    mctx.textBaseline = "middle";
+    mctx.font = `900 ${Math.min(width, height) * 0.55}px Arial, sans-serif`;
+    mctx.fillText("K", cx, cy);
+    const pixels = mctx.getImageData(0, 0, width, height).data;
+
+    const dots: Dot[] = [];
+    const cols = Math.ceil(width / SPACING);
+    const rows = Math.ceil(height / SPACING);
+    let maxDist = 1;
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const x = col * SPACING;
+        const y = row * SPACING;
+        const idx = (Math.floor(y) * width + Math.floor(x)) * 4;
+        if (pixels[idx + 3] <= 128) continue;
+
+        const dist = Math.hypot(x - cx, y - cy);
+        maxDist = Math.max(maxDist, dist);
+        dots.push({
+          x,
+          y,
+          dirX: dist > 0 ? (x - cx) / dist : 0,
+          dirY: dist > 0 ? (y - cy) / dist : -1,
+          formDelay: 0, // filled in below once maxDist is known
+          formDuration: FORM_MS * 0.45,
+        });
+      }
+    }
+    for (const dot of dots) {
+      const dist = Math.hypot(dot.x - cx, dot.y - cy);
+      dot.formDelay = (dist / maxDist) * (FORM_MS * 0.5);
+    }
+
+    const burstDistance = Math.max(width, height) * 0.7;
     let raf = 0;
     const start = performance.now();
 
     function draw(now: number) {
-      const t = Math.min(1, (now - start) / REVEAL_MS);
+      const elapsed = now - start;
       ctx!.clearRect(0, 0, width, height);
 
-      // Soft leading edge: dots pop in as the ripple's radius passes them,
-      // instead of snapping on all at once.
-      const edge = 0.14;
+      for (const dot of dots) {
+        let opacity = 0;
+        let scale = 0;
+        let dx = 0;
+        let dy = 0;
 
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = col * SPACING;
-          const y = row * SPACING;
-          const dist = Math.hypot(x - cx, y - cy) / maxDist;
-          const opacity = Math.max(0, Math.min(1, (t - dist) / edge));
-          if (opacity <= 0) continue;
-
-          ctx!.beginPath();
-          ctx!.arc(x, y, RADIUS, 0, Math.PI * 2);
-          ctx!.fillStyle = `rgba(${DOT_COLOR}, ${opacity * 0.9})`;
-          ctx!.fill();
+        if (elapsed < FORM_MS) {
+          const local = Math.max(
+            0,
+            Math.min(1, (elapsed - dot.formDelay) / dot.formDuration)
+          );
+          opacity = local;
+          scale = local;
+        } else if (elapsed < FORM_MS + HOLD_MS) {
+          opacity = 1;
+          scale = 1;
+        } else {
+          const t = Math.max(
+            0,
+            Math.min(1, (elapsed - FORM_MS - HOLD_MS) / BURST_MS)
+          );
+          const eased = easeOutCubic(t);
+          dx = dot.dirX * eased * burstDistance;
+          dy = dot.dirY * eased * burstDistance;
+          opacity = 1 - Math.min(1, t * 1.3);
+          scale = 1 + eased * 0.6;
         }
+
+        if (opacity <= 0) continue;
+        ctx!.beginPath();
+        ctx!.arc(dot.x + dx, dot.y + dy, RADIUS * scale, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(${DOT_COLOR}, ${opacity})`;
+        ctx!.fill();
       }
 
-      if (t < 1) raf = requestAnimationFrame(draw);
+      if (elapsed < FORM_MS + HOLD_MS + BURST_MS) raf = requestAnimationFrame(draw);
     }
 
     raf = requestAnimationFrame(draw);
-    const hideTimer = setTimeout(() => setVisible(false), REVEAL_MS + HOLD_MS);
+    const hideTimer = setTimeout(
+      () => setVisible(false),
+      FORM_MS + HOLD_MS + BURST_MS
+    );
 
     return () => {
       cancelAnimationFrame(raf);
