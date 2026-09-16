@@ -25,7 +25,7 @@ const services = [
     description:
       "Building the products I design, frontend and a bit of backend with Node.js and MongoDB.",
     details:
-      "Mostly React and Next.js on the frontend — I like being the one who builds what I designed, since it keeps the two honest. On the backend I've worked with Node.js, Express, and MongoDB when a project needs its own API, authentication, or a database, most recently on the KSK Beveren app.",
+      "Mostly React and Next.js on the frontend. I like being the one who builds what I designed, since it keeps the two honest. On the backend I've worked with Node.js, Express, and MongoDB when a project needs its own API, authentication, or a database, most recently on the KSK Beveren app.",
   },
   {
     title: "Product Prototyping",
@@ -40,19 +40,19 @@ const processSteps = [
     title: "Discover",
     description: "Understand the problem, the users, and the constraints.",
     details:
-      "Before opening Figma, I try to get clear on who this is actually for and what they're doing today instead of using this product. That means talking to users where possible, looking at what already exists, and writing down the actual problem in one sentence — if I can't do that, I'm not ready to design yet.",
+      "Before opening Figma, I try to get clear on who this is actually for and what they're doing today instead of using this product. That means talking to users where possible, looking at what already exists, and writing down the actual problem in one sentence. If I can't do that, I'm not ready to design yet.",
   },
   {
     title: "Design",
     description: "Wireframes, visual design, and a system to build on.",
     details:
-      "Wireframes come first, so structure and flow get settled before any visual decisions. Then visual design, building or extending a small design system along the way — colors, type, spacing, components — so the product feels considered rather than assembled screen by screen.",
+      "Wireframes come first, so structure and flow get settled before any visual decisions. Then visual design, building or extending a small design system of colors, type, spacing, and components along the way, so the product feels considered rather than assembled screen by screen.",
   },
   {
     title: "Test",
     description: "Validate the design with real users before it's built.",
     details:
-      "Even informal feedback — sitting next to someone while they try to use it — catches problems a design review never will. I'd rather find out a flow doesn't make sense here, on a Figma prototype, than after it's already built and shipped.",
+      "Even informal feedback, like sitting next to someone while they try to use it, catches problems a design review never will. I'd rather find out a flow doesn't make sense here, on a Figma prototype, than after it's already built and shipped.",
   },
   {
     title: "Build",
@@ -64,7 +64,7 @@ const processSteps = [
     title: "Ship",
     description: "Launch, gather feedback, and iterate.",
     details:
-      "Launching isn't the finish line — it's when real usage data starts. I watch how a product actually gets used once it's live, gather feedback from real users where I can, and treat the first version as a starting point to iterate on rather than a finished product.",
+      "Launching isn't the finish line. It's when real usage data starts. I watch how a product actually gets used once it's live, gather feedback from real users where I can, and treat the first version as a starting point to iterate on rather than a finished product.",
   },
 ];
 
