@@ -60,7 +60,7 @@ export default function Hero() {
         >
           <Magnetic>
             <Link
-              href="#work"
+              href="/work"
               className="inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
             >
               View my work

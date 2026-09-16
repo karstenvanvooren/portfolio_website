@@ -1,18 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
+import { findPublicImage } from "@/lib/findPublicImage";
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const cover = findPublicImage("images/projects", project.slug);
+
   return (
     <Link
       href={`/work/${project.slug}`}
       className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-shadow hover:shadow-lg hover:shadow-black/5"
     >
-      {/* Swap this placeholder block for a real screenshot/mockup image */}
       <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-ink">
-        <div className="gradient-blob absolute inset-0 opacity-80 transition-transform duration-500 group-hover:scale-110" />
-        <span className="relative font-display text-sm font-medium uppercase tracking-wide text-ink-foreground">
-          {project.cover.label}
-        </span>
+        {cover ? (
+          <Image
+            src={cover}
+            alt={project.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+        ) : (
+          <>
+            <div className="gradient-blob absolute inset-0 opacity-80 transition-transform duration-500 group-hover:scale-110" />
+            <span className="relative font-display text-sm font-medium uppercase tracking-wide text-ink-foreground">
+              {project.cover.label}
+            </span>
+          </>
+        )}
       </div>
       <div className="flex flex-col gap-2 p-5">
         <div className="flex items-center justify-between gap-3">

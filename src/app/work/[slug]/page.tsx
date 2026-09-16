@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import ListRow from "@/components/ListRow";
 import { getProject, projects } from "@/data/projects";
+import { findPublicImage } from "@/lib/findPublicImage";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -19,6 +21,7 @@ export default async function CaseStudyPage({
 
   const index = projects.findIndex((p) => p.slug === slug);
   const next = projects[(index + 1) % projects.length];
+  const cover = findPublicImage("images/projects", project.slug);
 
   return (
     <article>
@@ -63,14 +66,28 @@ export default async function CaseStudyPage({
         </div>
       </header>
 
-      {/* Cover placeholder — swap for a real screenshot/hero image */}
+      {/* Cover — falls back to a placeholder until an image with this
+          project's slug is dropped into public/images/projects */}
       <Reveal>
         <div className="mx-auto flex max-w-[1600px] items-center justify-center px-6 py-10 sm:px-10">
           <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl bg-ink">
-            <div className="gradient-blob absolute inset-0 opacity-80" />
-            <span className="relative font-display font-medium uppercase tracking-wide text-ink-foreground">
-              {project.cover.label}
-            </span>
+            {cover ? (
+              <Image
+                src={cover}
+                alt={project.title}
+                fill
+                sizes="(min-width: 1600px) 1600px, 100vw"
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <>
+                <div className="gradient-blob absolute inset-0 opacity-80" />
+                <span className="relative font-display font-medium uppercase tracking-wide text-ink-foreground">
+                  {project.cover.label}
+                </span>
+              </>
+            )}
           </div>
         </div>
       </Reveal>

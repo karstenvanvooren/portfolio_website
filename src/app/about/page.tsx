@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SplitSection from "@/components/SplitSection";
+import { findPublicImage } from "@/lib/findPublicImage";
 
 const skillGroups = [
   {
@@ -31,16 +33,30 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const photo = findPublicImage("images/profile", "photo");
+
   return (
     <div className="mx-auto max-w-[1600px] px-6 py-20 sm:px-10">
       <div className="grid gap-10 sm:grid-cols-2 sm:items-start sm:gap-16">
         <Reveal>
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink">
-            <div className="gradient-blob absolute inset-0 opacity-80" />
-            <span className="relative flex h-full items-center justify-center font-display text-sm font-medium uppercase tracking-wide text-ink-foreground">
-              {/* Swap for a real photo */}
-              Photo
-            </span>
+            {photo ? (
+              <Image
+                src={photo}
+                alt="Karsten van Vooren"
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <>
+                <div className="gradient-blob absolute inset-0 opacity-80" />
+                <span className="relative flex h-full items-center justify-center font-display text-sm font-medium uppercase tracking-wide text-ink-foreground">
+                  Photo
+                </span>
+              </>
+            )}
             <div className="absolute -right-3 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-lg bg-accent px-2 py-4 shadow-lg sm:-right-4">
               <span className="text-[11px] font-semibold uppercase tracking-widest text-accent-foreground [writing-mode:vertical-rl]">
                 Open to work
