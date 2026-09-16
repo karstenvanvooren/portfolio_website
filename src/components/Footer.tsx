@@ -1,17 +1,16 @@
 export default function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-        <p>© {new Date().getFullYear()} Karsten Van Vooren. Built from scratch.</p>
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
+        <p>© {new Date().getFullYear()} Karsten van Vooren</p>
         <div className="flex gap-5">
-          {/* Replace with your real links */}
-          <a href="mailto:you@example.com" className="hover:text-foreground">
+          <a href="mailto:karstenvanvooren@gmail.com" className="link-underline hover:text-foreground">
             Email
           </a>
-          <a href="https://github.com/karstenvanvooren" className="hover:text-foreground" target="_blank" rel="noreferrer">
+          <a href="https://github.com/karstenvanvooren" className="link-underline hover:text-foreground" target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a href="#" className="hover:text-foreground">
+          <a href="https://www.linkedin.com/in/karstenvanvooren/" className="link-underline hover:text-foreground" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
         </div>

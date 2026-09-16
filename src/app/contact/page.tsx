@@ -1,11 +1,15 @@
 import Reveal from "@/components/Reveal";
+import Magnetic from "@/components/Magnetic";
+import DotGrid from "@/components/DotGrid";
 
 export default function ContactPage() {
   return (
     // Bold, full-bleed closing moment — a nod to the "bedankt!" page in
-    // your PDF portfolio, rebuilt as a proper contact page.
-    <div className="relative isolate flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-ink px-6 text-center text-ink-foreground">
-      <div className="gradient-blob pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+    // your PDF portfolio, rebuilt as a proper contact page. Same
+    // cursor-reactive dot grid as the hero, for the same reason: this is
+    // the other "big statement" section on the site.
+    <div className="relative isolate flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-background px-6 text-center text-foreground sm:px-10">
+      <DotGrid />
 
       <div className="relative mx-auto max-w-2xl">
         <Reveal>
@@ -15,36 +19,57 @@ export default function ContactPage() {
           <h1 className="mt-4 font-display text-5xl font-semibold tracking-tight sm:text-7xl">
             Let&apos;s talk.
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-lg text-ink-foreground/70">
-            {/* Replace with your real pitch — mention freelance availability once you're taking clients */}
+          <p className="mx-auto mt-6 max-w-md text-lg text-muted">
             Open to freelance UX/UI work and collaborations. The fastest way
             to reach me is email.
           </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <a
-            href="mailto:you@example.com"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-          >
-            you@example.com
-          </a>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Magnetic>
+              <a
+                href="mailto:karstenvanvooren@gmail.com"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+              >
+                karstenvanvooren@gmail.com
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="tel:+32479410599"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-medium transition-colors hover:border-foreground"
+              >
+                +32 479 41 05 99
+              </a>
+            </Magnetic>
+          </div>
         </Reveal>
 
         <Reveal delay={0.18}>
-          <div className="mt-10 flex justify-center gap-6 text-sm text-ink-foreground/60">
+          <div className="mt-10 flex justify-center gap-6 text-sm text-muted">
             <a
               href="https://github.com/karstenvanvooren"
-              className="hover:text-ink-foreground"
+              className="link-underline hover:text-foreground"
               target="_blank"
               rel="noreferrer"
             >
               GitHub
             </a>
-            <a href="#" className="hover:text-ink-foreground">
+            <a
+              href="https://www.linkedin.com/in/karstenvanvooren/"
+              className="link-underline hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
               LinkedIn
             </a>
-            <a href="#" className="hover:text-ink-foreground">
+            <a
+              href="https://www.instagram.com/vanvoorenkarsten/"
+              className="link-underline hover:text-foreground"
+              target="_blank"
+              rel="noreferrer"
+            >
               Instagram
             </a>
           </div>
