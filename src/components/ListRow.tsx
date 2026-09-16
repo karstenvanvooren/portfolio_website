@@ -67,16 +67,9 @@ export default function ListRow({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="grid gap-6 pb-8 pl-[3.25rem] sm:grid-cols-[1fr_180px] sm:pb-10 sm:pl-[3.75rem]">
-            <p className="max-w-md text-sm leading-relaxed text-muted">{details}</p>
-            {/* Swap for a real screenshot/photo relevant to this step */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-ink sm:aspect-square">
-              <div className="gradient-blob absolute inset-0 opacity-80" />
-              <span className="relative flex h-full items-center justify-center px-2 text-center font-display text-[10px] font-medium uppercase tracking-wide text-ink-foreground">
-                {title}
-              </span>
-            </div>
-          </div>
+          <p className="max-w-2xl pb-8 pl-[3.25rem] text-sm leading-relaxed text-muted sm:pb-10 sm:pl-[3.75rem]">
+            {details}
+          </p>
         </div>
       </div>
     </div>
