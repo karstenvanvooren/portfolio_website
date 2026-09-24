@@ -17,7 +17,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: easeOut }}
-          className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-accent"
+          className="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-accent-text"
         >
           {/* Replace with your real focus / school */}
           UX/UI Design Student

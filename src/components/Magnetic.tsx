@@ -14,6 +14,7 @@ export default function Magnetic({ children }: { children: ReactNode }) {
   const springY = useSpring(y, { stiffness: 200, damping: 15, mass: 0.4 });
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const rect = e.currentTarget.getBoundingClientRect();
     x.set((e.clientX - rect.left - rect.width / 2) * STRENGTH);
     y.set((e.clientY - rect.top - rect.height / 2) * STRENGTH);

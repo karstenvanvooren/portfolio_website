@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import LiveClock from "@/components/LiveClock";
 import Magnetic from "@/components/Magnetic";
@@ -13,6 +14,11 @@ const links = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 text-foreground backdrop-blur">
@@ -31,22 +37,28 @@ export default function Nav() {
         </Link>
 
         <nav className="hidden gap-6 text-xs font-medium uppercase tracking-widest sm:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="link-underline text-muted transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`link-underline transition-colors hover:text-foreground ${
+                  active ? "is-active text-foreground" : "text-muted"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center sm:flex">
           <Magnetic>
             <Link
               href="/contact"
-              className="link-underline text-xs font-medium uppercase tracking-widest transition-colors hover:text-accent"
+              className="link-underline text-xs font-medium uppercase tracking-widest transition-colors hover:text-accent-text"
             >
               Let&apos;s talk
             </Link>
@@ -70,20 +82,26 @@ export default function Nav() {
 
       {open && (
         <nav className="flex flex-col gap-1 border-t border-border bg-background px-6 py-3 sm:hidden">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="link-underline inline-block py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                aria-current={active ? "page" : undefined}
+                className={`link-underline inline-block py-2 text-sm font-medium transition-colors hover:text-foreground ${
+                  active ? "is-active text-foreground" : "text-muted"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="py-2 text-sm font-medium text-accent"
+            className="py-2 text-sm font-medium text-accent-text"
           >
             Let&apos;s talk
           </Link>

@@ -13,7 +13,7 @@ export default function NotFound() {
       <DotGrid />
 
       <div className="relative mx-auto max-w-md">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">404</p>
+        <p className="text-sm font-medium uppercase tracking-widest text-accent-text">404</p>
         <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight sm:text-6xl">
           Page not found.
         </h1>

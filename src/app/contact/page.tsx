@@ -18,7 +18,7 @@ export default function ContactPage() {
     <div className="flex min-h-[80vh] flex-col items-center justify-center bg-background px-6 py-20 text-center text-foreground sm:px-10">
       <div className="mx-auto w-full max-w-xl">
         <Reveal>
-          <p className="text-sm font-medium uppercase tracking-widest text-accent">
+          <p className="text-sm font-medium uppercase tracking-widest text-accent-text">
             Get in touch
           </p>
           <h1 className="mt-4 font-display text-5xl font-semibold tracking-tight sm:text-7xl">

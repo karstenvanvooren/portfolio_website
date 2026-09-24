@@ -65,7 +65,7 @@ export default function ContactForm() {
             type="text"
             required
             autoComplete="name"
-            className="border-b border-border bg-transparent py-2 text-sm text-foreground outline-none transition-colors focus:border-accent"
+            className="rounded-sm border-b border-border bg-transparent py-2 text-sm text-foreground outline-2 outline-offset-2 transition-colors focus:border-accent-text"
           />
         </div>
         <div className="flex flex-col gap-1.5">
@@ -78,7 +78,7 @@ export default function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            className="border-b border-border bg-transparent py-2 text-sm text-foreground outline-none transition-colors focus:border-accent"
+            className="rounded-sm border-b border-border bg-transparent py-2 text-sm text-foreground outline-2 outline-offset-2 transition-colors focus:border-accent-text"
           />
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={4}
-          className="resize-none border-b border-border bg-transparent py-2 text-sm text-foreground outline-none transition-colors focus:border-accent"
+          className="resize-none rounded-sm border-b border-border bg-transparent py-2 text-sm text-foreground outline-2 outline-offset-2 transition-colors focus:border-accent-text"
         />
       </div>
 

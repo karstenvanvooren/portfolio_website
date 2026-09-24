@@ -47,7 +47,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </span>
           ))}
         </div>
-        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent">
+        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent-text">
           View case study
           <span className="transition-transform group-hover:translate-x-1">→</span>
         </span>

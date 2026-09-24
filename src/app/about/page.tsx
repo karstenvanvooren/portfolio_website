@@ -74,7 +74,7 @@ export default function AboutPage() {
 
         <div>
           <Reveal>
-            <p className="text-sm font-medium uppercase tracking-widest text-accent">About</p>
+            <p className="text-sm font-medium uppercase tracking-widest text-accent-text">About</p>
             <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-5xl">
               I&apos;m an Interface Design student focusing on UX/UI.
             </h1>

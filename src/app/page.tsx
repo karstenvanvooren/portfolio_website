@@ -82,7 +82,7 @@ export default function Home() {
         <SplitSection label="Selected work">
           <div id="work" className="flex scroll-mt-24 items-end justify-between">
             <p className="text-sm text-muted">Recent projects</p>
-            <Link href="/work" className="link-underline text-sm font-medium text-accent">
+            <Link href="/work" className="link-underline text-sm font-medium text-accent-text">
               View all work →
             </Link>
           </div>

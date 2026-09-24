@@ -23,6 +23,10 @@ export default function DotGrid() {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !parent || !ctx) return;
 
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let width = 0;
     let height = 0;
@@ -90,7 +94,34 @@ export default function DotGrid() {
       raf = requestAnimationFrame(draw);
     }
 
+    // Reduced motion: draw the grid once at rest, with no cursor tracking,
+    // repel displacement, or per-frame loop.
+    function drawStatic() {
+      ctx!.clearRect(0, 0, width, height);
+      const cols = Math.ceil(width / SPACING) + 1;
+      const rows = Math.ceil(height / SPACING) + 1;
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          ctx!.beginPath();
+          ctx!.arc(col * SPACING, row * SPACING, BASE_RADIUS, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${DOT_COLOR}, 0.1)`;
+          ctx!.fill();
+        }
+      }
+    }
+
     resize();
+
+    if (prefersReduced) {
+      drawStatic();
+      const ro = new ResizeObserver(() => {
+        resize();
+        drawStatic();
+      });
+      ro.observe(parent);
+      return () => ro.disconnect();
+    }
+
     draw();
 
     const ro = new ResizeObserver(resize);

@@ -164,7 +164,7 @@ export default function Preloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: EXIT_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[9999] bg-background"
+          className="pointer-events-none fixed inset-0 z-[9999] bg-background"
         >
           <canvas ref={canvasRef} aria-hidden className="h-full w-full" />
         </motion.div>

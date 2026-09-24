@@ -35,7 +35,7 @@ export default function ListRow({
             className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border text-xs font-semibold transition-colors duration-300 ${
               open
                 ? "border-accent bg-accent text-accent-foreground"
-                : "border-border text-accent group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
+                : "border-border text-accent-text group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
             }`}
           >
             {chip}
@@ -43,7 +43,7 @@ export default function ListRow({
           <div>
             <h3
               className={`font-display text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-2xl ${
-                open ? "text-accent" : "group-hover:text-accent"
+                open ? "text-accent-text" : "group-hover:text-accent-text"
               }`}
             >
               {title}
@@ -53,7 +53,7 @@ export default function ListRow({
         </div>
         <span
           aria-hidden
-          className={`shrink-0 pt-1 text-lg text-accent transition-transform duration-300 ${
+          className={`shrink-0 pt-1 text-lg text-accent-text transition-transform duration-300 ${
             open ? "rotate-45" : ""
           }`}
         >

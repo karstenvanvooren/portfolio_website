@@ -10,10 +10,17 @@
 
   /* Your accent — swap this to reskin the whole site */
   --accent: #fe5e1f;
-  --accent-foreground: #ffffff;
+  /* Dark, not white: white-on-accent is only 3.07:1, below the 4.5:1 text
+     needs — var(--foreground) on accent is 6.01:1. */
+  --accent-foreground: var(--foreground);
   /* Second stop used for gradients paired with --accent — another
      orange, so gradients read as one warm family instead of two colors */
   --accent-2: #ffb238;
+  /* A darker orange for small accent-colored TEXT (labels, links, icons) —
+     --accent itself is only ~3:1 on these light backgrounds, below the
+     4.5:1 small text needs. This one is 4.79:1. Reserve --accent for fills
+     and large/bold text, where 3:1 is enough. */
+  --accent-text: #bf4a11;
 
   /* Dark surface used for the hero + closing section, echoing the PDF cover/"bedankt" pages */
   --ink: #14120f;
@@ -29,6 +36,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-2: var(--accent-2);
+  --color-accent-text: var(--accent-text);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --font-sans: var(--font-inter);
@@ -92,6 +100,28 @@ body {
 .link-underline:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+/* Persistent version of the underline above, for the current page's nav
+   link — a hover-only state isn't enough to show where you are. */
+.link-underline.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Plain rules on purpose: Tailwind's `outline-*` utilities weren't losing
+   to `focus-visible:outline-*` the way normal cascade order would
+   predict, so outline-color is controlled here directly instead. Plain
+   :focus (not :focus-visible) — for text fields specifically, showing
+   the ring on any focus method, mouse click included, is the standard,
+   expected behavior, not just a keyboard-only nicety. */
+input,
+textarea {
+  outline-color: transparent;
+}
+input:focus,
+textarea:focus {
+  outline-color: var(--accent-text);
 }
 
 @media (prefers-reduced-motion: reduce) {
