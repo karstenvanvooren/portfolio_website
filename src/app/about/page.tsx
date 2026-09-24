@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SplitSection from "@/components/SplitSection";
 import { findPublicImage } from "@/lib/findPublicImage";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Interface Design student focused on UX/UI — what I work with, and what I care about in a design.",
+};
 
 const skillGroups = [
   {

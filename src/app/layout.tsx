@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
+import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,7 +27,11 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Karsten van Vooren - Portfolio",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Karsten van Vooren - Portfolio",
+    template: "%s — Karsten van Vooren",
+  },
   description:
     "Portfolio of Karsten van Vooren, a UX/UI design student building product case studies and freelance work.",
 };

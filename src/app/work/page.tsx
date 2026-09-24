@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import SplitSection from "@/components/SplitSection";
 import { projects } from "@/data/projects";
+
+export const metadata: Metadata = {
+  title: "Work",
+  description:
+    "Product design and development case studies — from early concepts to shipped apps.",
+};
 
 export default function WorkPage() {
   return (

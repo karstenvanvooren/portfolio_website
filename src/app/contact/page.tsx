@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
 import ContactForm from "@/components/ContactForm";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch — open to freelance UX/UI work and collaborations.",
+};
 
 export default function ContactPage() {
   return (
