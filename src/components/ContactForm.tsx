@@ -9,13 +9,19 @@ import Magnetic from "@/components/Magnetic";
 // message. Get your own at web3forms.com and swap it in here.
 const WEB3FORMS_ACCESS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending" | "sent" | "error" | "not-configured";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (WEB3FORMS_ACCESS_KEY === "YOUR-WEB3FORMS-ACCESS-KEY") {
+      setStatus("not-configured");
+      return;
+    }
+
     setStatus("sending");
 
     const form = e.currentTarget;
@@ -112,6 +118,11 @@ export default function ContactForm() {
         {status === "error" && (
           <p className="text-sm text-muted">
             Something went wrong — try again, or email me directly below.
+          </p>
+        )}
+        {status === "not-configured" && (
+          <p className="text-sm text-muted">
+            This form isn&apos;t connected yet — email me directly below instead.
           </p>
         )}
       </div>
