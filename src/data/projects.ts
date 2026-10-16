@@ -11,7 +11,9 @@ export type Project = {
   year: string;
   summary: string;
   tags: string[];
-  cover: { label: string };
+  // anchor: "left" pins the cover mockup to the left edge of the frame on
+  // the project page, for mockups that are cut off on their left side.
+  cover: { label: string; anchor?: "left" };
   problem: string;
   process: ProcessStep[];
   solution: string;

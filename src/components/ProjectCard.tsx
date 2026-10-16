@@ -11,7 +11,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       href={`/work/${project.slug}`}
       className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-shadow hover:shadow-lg hover:shadow-black/5"
     >
-      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-ink">
+      <div
+        className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden ${
+          cover ? "mockup-bg" : "bg-ink"
+        }`}
+      >
         {cover ? (
           <Image
             src={cover}

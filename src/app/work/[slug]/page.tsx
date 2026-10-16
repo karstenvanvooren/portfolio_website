@@ -50,7 +50,10 @@ export default async function CaseStudyPage({
         <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
           <div className="max-w-3xl">
             <Reveal>
-              <Link href="/work" className="text-sm text-muted hover:text-foreground">
+              <Link
+                href="/work"
+                className="link-underline text-sm font-medium text-accent-text"
+              >
                 ← Back to work
               </Link>
             </Reveal>
@@ -86,14 +89,18 @@ export default async function CaseStudyPage({
           project's slug is dropped into public/images/projects */}
       <Reveal>
         <div className="mx-auto flex max-w-[1600px] items-center justify-center px-6 py-10 sm:px-10">
-          <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl bg-ink">
+          <div
+            className={`relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-2xl ${
+              cover ? "mockup-bg" : "bg-ink"
+            }`}
+          >
             {cover ? (
               <Image
                 src={cover}
                 alt={project.title}
                 fill
                 sizes="(min-width: 1600px) 1600px, 100vw"
-                className="object-cover"
+                className={`object-contain ${project.cover.anchor === "left" ? "object-left" : ""}`}
                 priority
               />
             ) : (

@@ -15,6 +15,9 @@ export default function SmoothScroll() {
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      // Smooth-scroll in-page #links too (e.g. the hero's ScrollCue),
+      // stopping clear of the fixed header like scroll-mt-24 does natively.
+      anchors: { offset: -96 },
     });
 
     function raf(time: number) {

@@ -68,6 +68,28 @@ body {
   animation: drift 14s ease-in-out infinite;
 }
 
+/* Backdrop for transparent device mockups: a warm orange gradient with a
+   soft light spot behind the devices so they don't sink into the color. */
+.mockup-bg {
+  background: radial-gradient(
+      60% 55% at 50% 45%,
+      rgb(255 255 255 / 0.35) 0%,
+      transparent 70%
+    ),
+    linear-gradient(140deg, var(--accent) 0%, var(--accent-2) 100%);
+}
+
+/* Gentle up-down nudge for the hero's scroll-down arrow (ScrollCue). */
+@keyframes scroll-cue-bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 @keyframes drift {
   0% {
     background-position: 0% 0%, 100% 100%, 0 0;
