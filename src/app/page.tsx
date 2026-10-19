@@ -65,7 +65,7 @@ const processSteps = [
     title: "Reflect",
     description: "Look back on what worked and what I'd do differently next time.",
     details:
-      "After a project I write down what went well, what didn't, and what I'd change. That's where I learn the most, and it's why my case studies end with a short reflection.",
+      "After a project I write down what went well, what didn't, and what I'd change. That's where I learn the most.",
   },
 ];
 

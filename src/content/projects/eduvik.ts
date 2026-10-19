@@ -24,7 +24,7 @@ const eduvik: CaseStudy = {
       "Eduvik connects pupils from primary and secondary school, their parents and tutors. Tutors need a clear overview of their lessons and a reason to stay active on the platform.",
     solution:
       "A tutor app with a clear dashboard and a rank system (Bronze to Platinum) that rewards lessons, positive reviews and consistency.",
-    result: "A clickable Figma prototype. The result was good.",
+    result: "A clickable prototype of the tutor side of the app.",
   },
 
   context: [
@@ -68,14 +68,45 @@ const eduvik: CaseStudy = {
   },
 
   styleGuide: {
-    description: [
-      "Dark navy and turquoise, with hexagon shapes for the home button and rank badges.",
+    colors: [
+      { name: "Dark Blue", hex: "#033F63", role: "Primary" },
+      { name: "Navy", hex: "#1A3F62", role: "Buttons, headings" },
+      { name: "Turquoise", hex: "#2CB8A9", role: "Secondary, navigation, highlights" },
+      { name: "Text", hex: "#2C2B2B" },
+      { name: "Grey", hex: "#262626" },
+      { name: "White", hex: "#FFFFFF" },
     ],
-    image: { file: "styleguide.png", alt: "Eduvik tutor app style guide" },
-  },
-
-  reflection: {
-    result: "The result was good.",
+    typography: [
+      {
+        role: "Heading 1",
+        spec: "Montserrat Bold 40px",
+        font: "montserrat",
+        weight: 700,
+        size: 40,
+        color: "#1A3F62",
+        sample: "Hey Sophie",
+      },
+      {
+        role: "Section titles",
+        spec: "Montserrat Bold 18px",
+        font: "montserrat",
+        weight: 700,
+        size: 18,
+        color: "#1A3F62",
+        sample: "Your progress",
+      },
+      {
+        role: "Body text",
+        spec: "Montserrat Regular",
+        font: "montserrat",
+        weight: 400,
+        size: 16,
+        color: "#2C2B2B",
+        sample: "Here you can follow your progress as a tutor.",
+      },
+    ],
+    componentPreview: true,
+    description: ["Hexagons are the recurring shape, for the home button, the rank badges and the subject icons."],
   },
 };
 

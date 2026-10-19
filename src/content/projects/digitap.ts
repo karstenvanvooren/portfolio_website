@@ -33,7 +33,8 @@ const digitap: CaseStudy = {
       "Digitap, AP's digital learning platform, holds course materials, assignments, grades and communication, but it asks a lot of its users. The brief was a use case for learning management platforms.",
     solution:
       "A mobile-first redesign that lowers the cognitive load and guides students and teachers through clear, task-based flows.",
-    result: "A complete interactive prototype with three flows. Graded 14/20.",
+    result:
+      "A complete interactive prototype covering three flows: onboarding, the student side and the teacher side.",
   },
 
   context: [
@@ -83,21 +84,32 @@ const digitap: CaseStudy = {
 
   styleGuide: {
     colors: [
-      { name: "AP Red", hex: "#DE2F38", role: "Primary" },
-      { name: "Dark Red", hex: "#930108" },
-      { name: "Purple", hex: "#C72FDE", role: "Communication features" },
+      { name: "AP Red", hex: "#DE2F38", role: "Primary actions, active states" },
+      { name: "Dark Red", hex: "#930108", role: "Accents, AP shapes" },
+      { name: "Purple", hex: "#C72FDE", role: "Communication: forums & surveys" },
+      { name: "Black", hex: "#000000", role: "Text" },
+      { name: "Border Grey", hex: "#DADADA", role: "Inputs, dividers, disabled" },
+      { name: "White", hex: "#FFFFFF", role: "Background" },
     ],
+    typography: [
+      { role: "Headings", spec: "Inter Black 32px", font: "inter", weight: 900, size: 32 },
+      { role: "Labels", spec: "Inter Medium 16px", font: "inter", weight: 500, size: 16 },
+      { role: "Body text", spec: "Inter Regular 16px", font: "inter", weight: 400, size: 16 },
+      {
+        role: "Placeholders",
+        spec: "Inter Italic 16px, #DADADA",
+        font: "inter",
+        weight: 400,
+        size: 16,
+        italic: true,
+        color: "#DADADA",
+        sample: "Enter your email address",
+      },
+    ],
+    componentPreview: true,
     description: [
-      "White and light greys keep the interface calm.",
-      "AP's geometric shapes appear on the start and end screens; the rest of the UI stays clean so content comes first.",
+      "AP's geometric shapes, quarter circles and squares in reds, appear only on the start and end screens. The rest stays clean so the content comes first.",
     ],
-    image: { file: "styleguide.png", alt: "Digitap redesign style guide" },
-  },
-
-  reflection: {
-    result: "14/20.",
-    proud: "A clean, clear interface across a large platform with three different user roles.",
-    nextTime: "Test the flows with real students before finalising the design.",
   },
 };
 

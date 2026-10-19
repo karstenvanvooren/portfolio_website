@@ -33,7 +33,7 @@ const kskBeverenApp: CaseStudy = {
       "Design and build a working mobile app with its own backend, from scratch. The brief was completely open.",
     solution:
       "A companion app for the supporters of my local club, KSK Beveren. Every screen pulls its data from my own API and database.",
-    result: "A fully working app with a live backend. Graded 16/20.",
+    result: "A fully working app with a live backend.",
   },
 
   context: [
@@ -93,8 +93,8 @@ const kskBeverenApp: CaseStudy = {
       { name: "Surface", hex: "#F5F7FB" },
     ],
     typography: [
-      { name: "Syne", usage: "Headings" },
-      { name: "Inter", usage: "Body text" },
+      { role: "Headings", spec: "Syne", font: "syne", weight: 700, size: 32 },
+      { role: "Body text", spec: "Inter", font: "inter", weight: 400, size: 16 },
     ],
     components: ["Custom floating tab bar", "Match cards", "News cards", "Screen headers"],
     image: { file: "styleguide.png", alt: "KSK Beveren app style guide: colours, type and components" },
@@ -132,17 +132,6 @@ const kskBeverenApp: CaseStudy = {
         href: "https://github.com/karstenvanvooren/kskbeverenapp-backend",
       },
     ],
-  },
-
-  reflection: {
-    result:
-      "16/20. The app looked good and worked fully, and almost everything on screen comes straight from the database.",
-    proud:
-      "It's a complete, working product, not just a prototype. Design and code are both mine.",
-    learned:
-      "How a backend really works, from models and routes to authentication and connecting a frontend to a live API.",
-    nextTime:
-      "Put the seed scripts in their own folder.",
   },
 };
 

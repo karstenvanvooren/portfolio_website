@@ -27,7 +27,7 @@ const voedselbankGame: CaseStudy = {
     solution:
       "A mobile game for young people (16–23) that takes them to real places in Antwerp, where mini-games teach them about food waste and food banks.",
     result:
-      "A working game: the map and location triggers work, and the mini-games start on arrival. The result was good.",
+      "A working game: the map and location triggers work, and the mini-games start on arrival.",
   },
 
   context: [
@@ -94,9 +94,9 @@ const voedselbankGame: CaseStudy = {
         image: { file: "feature-2.png", alt: "The Sleep Finn mini-game with food icons and a timer" },
       },
       {
-        title: "A design guide built for a broad audience",
+        title: "One consistent game world",
         description:
-          "Colours, buttons and text were defined once so every screen feels like the same game and stays accessible.",
+          "A design guide defined colours, buttons and text once, so every screen and mini-game feels like the same game and stays readable for a broad audience.",
         image: { file: "feature-3.png", alt: "Design guide with colours, buttons and text styles" },
       },
     ],
@@ -115,18 +115,55 @@ const voedselbankGame: CaseStudy = {
   ],
 
   styleGuide: {
-    image: { file: "styleguide.png", alt: "Voedselbank game design guide" },
+    colors: [
+      { name: "Success Green", hex: "#5AD12D", role: "Progress, correct answers" },
+      { name: "Error Red", hex: "#FF0000", role: "Wrong answers" },
+      {
+        name: "Light Grey",
+        hex: "#E8E9E9 → #C8C8C8",
+        role: "Game panel gradient",
+        background: "linear-gradient(180deg, #E8E9E9, #C8C8C8)",
+      },
+      { name: "Track Grey", hex: "#D9D9D9", role: "Empty progress bar" },
+      { name: "White", hex: "#FFFFFF", role: "Tiles, text on photos" },
+    ],
+    typography: [
+      {
+        role: "Titles",
+        spec: "Rubik Bold 36px",
+        font: "rubik",
+        weight: 700,
+        size: 36,
+        sample: "SLEEP FINN",
+      },
+      {
+        role: "Labels",
+        spec: "Rubik Regular 30px",
+        font: "rubik",
+        weight: 400,
+        size: 30,
+        sample: "Vooruitgang",
+      },
+      {
+        role: "Timer",
+        spec: "Egyptian Slate Pro Bold",
+        font: "slab",
+        weight: 700,
+        size: 32,
+        sample: "TIJD 9:50",
+        note: "Display font. Shown here in a similar slab serif, as Egyptian Slate Pro isn't available as a web font.",
+      },
+    ],
+    componentPreview: true,
+    description: [
+      "A blurred photo of the real location in the background, with a friendly illustrated character (Finn) on top.",
+    ],
   },
 
   testing: {
     paragraphs: [
       "After our pitch, the lecturers gave feedback on the concept. We reworked it before starting the sketches and wireframes.",
     ],
-  },
-
-  reflection: {
-    result: "The result was good.",
-    proud: "That it actually works. You walk to a location and the game starts.",
   },
 };
 

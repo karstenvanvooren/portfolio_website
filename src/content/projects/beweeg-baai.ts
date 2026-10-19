@@ -78,6 +78,30 @@ const beweegBaai: CaseStudy = {
     ],
   },
 
+  styleGuide: {
+    colors: [
+      { name: "Night", hex: "#0B1020", role: "Background" },
+      { name: "Deep Navy", hex: "#12183A" },
+      { name: "Text", hex: "#E9EEF9" },
+      { name: "Muted", hex: "#CFD8F6" },
+      { name: "Cyan", hex: "#7BDFF2", role: "Accent, buttons" },
+      { name: "Mint", hex: "#B2F7EF", role: "Highlight" },
+    ],
+    typography: [
+      { role: "Titles", spec: "Poppins 600", font: "poppins", weight: 600, size: 32, sample: "Beweeg Baai" },
+      {
+        role: "Text",
+        spec: "Poppins 400",
+        font: "poppins",
+        weight: 400,
+        size: 16,
+        sample: "Raise your hand to play higher notes.",
+      },
+    ],
+    componentPreview: true,
+    description: ["The wave itself changes hue with your movement."],
+  },
+
   build: {
     stack: [{ label: "Stack", items: ["JavaScript", "MediaPipe Hands", "Tone.js", "HTML Canvas"] }],
     notes: [
@@ -86,11 +110,6 @@ const beweegBaai: CaseStudy = {
       "HTML Canvas for the wave visual.",
       "Built with the help of an AI assistant; concept, interaction and tuning are my own.",
     ],
-  },
-
-  reflection: {
-    proud: "It's a fun, creative piece that works.",
-    learned: "My first time working with hand tracking.",
   },
 };
 

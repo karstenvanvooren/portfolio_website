@@ -6,7 +6,9 @@ import Reveal from "@/components/Reveal";
 import SplitSection from "@/components/SplitSection";
 import CaseStudyImage from "@/components/case-study/CaseStudyImage";
 import { getProject, projects } from "@/content/projects";
+import { styleGuidePreviews } from "@/components/case-study/StyleGuidePreviews";
 import { findPublicImage } from "@/lib/findPublicImage";
+import { specimenFontFamily, specimenFontVariables } from "@/lib/caseStudyFonts";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -56,7 +58,6 @@ export default async function CaseStudyPage({
     styleGuide,
     testing,
     build,
-    reflection,
   } = project;
 
   // Long values get two columns so they don't squeeze into one narrow cell.
@@ -94,12 +95,6 @@ export default async function CaseStudyPage({
     { label: "Result", text: glance?.result },
   ].filter((card): card is { label: string; text: string } => Boolean(card.text));
 
-  const reflectionItems = [
-    { label: "Result", text: reflection?.result },
-    { label: "What I'm proud of", text: reflection?.proud },
-    { label: "What I learned", text: reflection?.learned },
-    { label: "Next time", text: reflection?.nextTime },
-  ].filter((item): item is { label: string; text: string } => Boolean(item.text));
 
   return (
     <article>
@@ -383,33 +378,25 @@ export default async function CaseStudyPage({
         )}
         {renderCallouts("finalDesign")}
 
-        {/* 8. Style guide */}
+        {/* 8. Style guide: colours, a type specimen in the real fonts, live
+            components (StyleGuidePreviews.tsx) and visual-language notes */}
         {styleGuide && (
           <SplitSection label="Style guide">
-            <Reveal className="flex flex-col gap-10">
-              {styleGuide.description && styleGuide.description.length > 0 && (
-                <div className="max-w-2xl space-y-3 text-lg leading-relaxed text-muted">
-                  {styleGuide.description.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-              )}
+            <Reveal className={`flex flex-col gap-12 ${specimenFontVariables}`}>
               {styleGuide.colors && styleGuide.colors.length > 0 && (
                 <div>
                   <h3 className="text-xs uppercase tracking-wide text-muted">Colours</h3>
-                  <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                  <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
                     {styleGuide.colors.map((color) => (
-                      <li key={color.hex}>
+                      <li key={color.name}>
                         <div
                           className="h-20 rounded-xl border border-border"
-                          style={{ backgroundColor: color.hex }}
+                          style={{ background: color.background ?? color.hex }}
                           aria-hidden="true"
                         />
-                        <p className="mt-2 text-sm font-medium">
-                          {color.name}
-                          {color.role && <span className="font-normal text-muted"> · {color.role}</span>}
-                        </p>
+                        <p className="mt-2 text-sm font-medium">{color.name}</p>
                         <p className="font-mono text-xs text-muted">{color.hex}</p>
+                        {color.role && <p className="mt-1 text-xs leading-snug text-muted">{color.role}</p>}
                       </li>
                     ))}
                   </ul>
@@ -419,27 +406,66 @@ export default async function CaseStudyPage({
               {styleGuide.typography && styleGuide.typography.length > 0 && (
                 <div>
                   <h3 className="text-xs uppercase tracking-wide text-muted">Typography</h3>
-                  <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-                    {styleGuide.typography.map((font) => (
-                      <div key={font.name} className="rounded-xl border border-border p-5">
-                        <dt className="font-display text-2xl font-semibold tracking-tight">{font.name}</dt>
-                        <dd className="mt-1 text-sm text-muted">{font.usage}</dd>
+                  <dl className="mt-4 flex flex-col">
+                    {styleGuide.typography.map((type) => (
+                      <div
+                        key={type.role}
+                        className="grid gap-2 border-t border-border py-5 last:border-b sm:grid-cols-[200px_1fr] sm:items-baseline sm:gap-8"
+                      >
+                        <dt>
+                          <span className="block text-sm font-medium">{type.role}</span>
+                          <span className="block text-xs text-muted">{type.spec}</span>
+                        </dt>
+                        <dd>
+                          <span
+                            className="block break-words leading-tight"
+                            style={{
+                              fontFamily: specimenFontFamily[type.font],
+                              fontWeight: type.weight,
+                              fontStyle: type.italic ? "italic" : undefined,
+                              fontSize: type.size ? `min(${type.size}px, 9vw)` : undefined,
+                              color: type.color,
+                            }}
+                          >
+                            {type.sample ?? type.role}
+                          </span>
+                          {type.note && <span className="mt-2 block text-xs text-muted">{type.note}</span>}
+                        </dd>
                       </div>
                     ))}
                   </dl>
                 </div>
               )}
 
-              {styleGuide.components && styleGuide.components.length > 0 && (
+              {styleGuide.componentPreview && styleGuidePreviews[project.slug] ? (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Components</h3>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {styleGuide.components.map((component) => (
-                      <li key={component} className="rounded-full border border-border px-3 py-1.5 text-sm">
-                        {component}
-                      </li>
+                  <h3 className="mb-4 text-xs uppercase tracking-wide text-muted">Components</h3>
+                  {styleGuidePreviews[project.slug]()}
+                </div>
+              ) : (
+                styleGuide.components &&
+                styleGuide.components.length > 0 && (
+                  <div>
+                    <h3 className="text-xs uppercase tracking-wide text-muted">Components</h3>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {styleGuide.components.map((component) => (
+                        <li key={component} className="rounded-full border border-border px-3 py-1.5 text-sm">
+                          {component}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+              )}
+
+              {styleGuide.description && styleGuide.description.length > 0 && (
+                <div>
+                  <h3 className="text-xs uppercase tracking-wide text-muted">Visual language</h3>
+                  <div className="mt-3 max-w-2xl space-y-3 text-lg leading-relaxed text-muted">
+                    {styleGuide.description.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
@@ -552,23 +578,9 @@ export default async function CaseStudyPage({
             </Reveal>
           </SplitSection>
         )}
-
-        {/* 11. Result & reflection */}
-        {reflectionItems.length > 0 && (
-          <SplitSection label="Result & reflection">
-            <div className="grid gap-x-12 gap-y-8 sm:grid-cols-2">
-              {reflectionItems.map((item, i) => (
-                <Reveal key={item.label} delay={i * 0.06}>
-                  <h3 className="font-display text-lg font-semibold tracking-tight">{item.label}</h3>
-                  <p className="mt-2 leading-relaxed text-muted">{item.text}</p>
-                </Reveal>
-              ))}
-            </div>
-          </SplitSection>
-        )}
       </div>
 
-      {/* 12. Next project */}
+      {/* 11. Next project */}
       <div className="mt-10 border-t border-border">
         <Link
           href={`/work/${next.slug}`}

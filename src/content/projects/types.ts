@@ -23,6 +23,26 @@ export type Callout = {
   after: "context" | "finalDesign";
 };
 
+/** Fonts available to type specimens; see src/lib/caseStudyFonts.ts. */
+export type SpecimenFont = "inter" | "syne" | "montserrat" | "rubik" | "poppins" | "slab";
+
+export type TypeStyle = {
+  /** What it's used for, e.g. "Headings". */
+  role: string;
+  /** Human-readable spec, e.g. "Inter Black 32px". */
+  spec: string;
+  font: SpecimenFont;
+  weight?: number;
+  /** px. Large sizes are capped on small screens. */
+  size?: number;
+  italic?: boolean;
+  color?: string;
+  /** Sample text; defaults to the role. */
+  sample?: string;
+  /** Shown under the spec, e.g. that a substitute font is used. */
+  note?: string;
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -88,11 +108,17 @@ export type CaseStudy = {
   callouts?: Callout[];
 
   styleGuide?: {
-    colors?: { name: string; hex: string; role?: string }[];
-    /** Free text, for colours or a visual language without exact values. */
-    description?: string[];
-    typography?: { name: string; usage: string }[];
+    /** `background` overrides the swatch fill, e.g. for a gradient. */
+    colors?: { name: string; hex: string; role?: string; background?: string }[];
+    /** Type specimen: each row is rendered in the real font and size. */
+    typography?: TypeStyle[];
+    /** Component names as pills (used when there's no live preview). */
     components?: string[];
+    /** Render this project's live HTML/CSS component preview, from
+        src/components/case-study/StyleGuidePreviews.tsx. */
+    componentPreview?: boolean;
+    /** "Visual language" notes, one paragraph each. */
+    description?: string[];
     image?: CaseImage;
   };
 
@@ -105,12 +131,5 @@ export type CaseStudy = {
     diagram?: string[];
     notes?: string[];
     links?: CaseLink[];
-  };
-
-  reflection?: {
-    result?: string;
-    proud?: string;
-    learned?: string;
-    nextTime?: string;
   };
 };
