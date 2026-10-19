@@ -100,6 +100,9 @@ const voedselbankGame: CaseStudy = {
         image: { file: "feature-3.png", alt: "Design guide with colours, buttons and text styles" },
       },
     ],
+    showcase: [
+      { file: "mockup.png", alt: "Voedselbank game mockup on two phones" },
+    ],
   },
 
   callouts: [

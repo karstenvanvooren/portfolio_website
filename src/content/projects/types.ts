@@ -4,8 +4,9 @@
 // "Testing & iteration" section.
 //
 // Images live in public/images/projects/<slug>/. Refer to them by file
-// name only (e.g. "sketches.png"). If a file isn't there yet, the page
-// shows a grey placeholder box with the expected file name instead.
+// name only (e.g. "sketches.png"). If a file isn't there yet, that image
+// is simply left out (the text around it stays), and a row or strip with
+// no images at all isn't shown.
 
 export type CaseImage = {
   file: string;
@@ -103,6 +104,9 @@ export type CaseStudy = {
     alsoIncluded?: string;
     /** Strip with the remaining screens. */
     screens?: CaseImage[];
+    /** Large device mockup(s) at the end of the section, side by side
+        when there are two. Shown on the orange gradient. */
+    showcase?: CaseImage[];
   };
 
   callouts?: Callout[];

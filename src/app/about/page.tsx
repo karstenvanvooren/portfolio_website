@@ -102,7 +102,7 @@ export default function AboutPage() {
             {photo ? (
               <Image
                 src={photo}
-                alt="Portrait of Karsten van Vooren"
+                alt="Karsten van Vooren"
                 fill
                 sizes="(min-width: 640px) 40vw, 100vw"
                 className="object-cover"

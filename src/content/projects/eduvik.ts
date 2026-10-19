@@ -65,6 +65,10 @@ const eduvik: CaseStudy = {
       },
     ],
     alsoIncluded: "Bottom navigation with Chat, Trajectories, Home, Invoices and Settings.",
+    showcase: [
+      { file: "mockup.png", alt: "Eduvik tutor app mockup on two phones" },
+      { file: "mockup-laptop.png", alt: "Eduvik dashboard mockup on a laptop" },
+    ],
   },
 
   styleGuide: {

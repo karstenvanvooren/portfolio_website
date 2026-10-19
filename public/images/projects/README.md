@@ -21,9 +21,9 @@ with the device in the middle.
 ## Case study images
 
 Every other image is referenced by file name in the project's content
-file (`src/content/projects/<slug>.ts`). Until a file exists, the page
-shows a grey placeholder box with the expected file name, so you can see
-exactly what's still missing. The names used in `ksk-beveren-app.ts`:
+file (`src/content/projects/<slug>.ts`). Until a file exists, it
+simply isn't shown (the text around it stays), so the page never shows
+an empty slot. The names used in `ksk-beveren-app.ts`:
 
 | File | Section |
 |---|---|

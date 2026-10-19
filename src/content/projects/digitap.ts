@@ -80,6 +80,9 @@ const digitap: CaseStudy = {
       { file: "screen-2.png", alt: "Enrolled courses with progress" },
       { file: "screen-3.png", alt: "Grade overview" },
     ],
+    showcase: [
+      { file: "mockup.png", alt: "Digitap redesign mockup on a phone" },
+    ],
   },
 
   styleGuide: {

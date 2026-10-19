@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import SplitSection from "@/components/SplitSection";
-import CaseStudyImage from "@/components/case-study/CaseStudyImage";
+import CaseStudyImage, { caseImageExists } from "@/components/case-study/CaseStudyImage";
+import type { CaseImage } from "@/content/projects";
 import { getProject, projects } from "@/content/projects";
 import { styleGuidePreviews } from "@/components/case-study/StyleGuidePreviews";
 import { findPublicImage } from "@/lib/findPublicImage";
@@ -59,6 +60,19 @@ export default async function CaseStudyPage({
     testing,
     build,
   } = project;
+
+  const has = (image?: CaseImage) => caseImageExists(project.slug, image);
+  const researchImage = research?.image && has(research.image) ? research.image : undefined;
+  const processImages = process?.images?.filter(has) ?? [];
+  const beforeAfterItems = beforeAfter
+    ? [
+        { label: "Before", image: beforeAfter.before },
+        { label: "After", image: beforeAfter.after },
+      ].filter((item) => has(item.image))
+    : [];
+  const screens = finalDesign?.screens?.filter(has) ?? [];
+  const showcase = finalDesign?.showcase?.filter(has) ?? [];
+  const styleGuideImage = styleGuide?.image && has(styleGuide.image) ? styleGuide.image : undefined;
 
   // Long values get two columns so they don't squeeze into one narrow cell.
   const metaItems = [
@@ -234,11 +248,11 @@ export default async function CaseStudyPage({
                   </ul>
                 </div>
               )}
-              {research.image && (
+              {researchImage && (
                 <CaseStudyImage
                   slug={project.slug}
-                  image={research.image}
-                  aspect="aspect-video"
+                  image={researchImage}
+                  maxHeight="max-h-[720px]"
                   sizes="(min-width: 1600px) 1300px, 100vw"
                 />
               )}
@@ -247,7 +261,7 @@ export default async function CaseStudyPage({
         )}
 
         {/* 6. Process: numbered steps and/or an image strip */}
-        {process && Boolean(process.steps?.length || process.images?.length) && (
+        {process && Boolean(process.steps?.length || processImages.length) && (
           <SplitSection label="Process">
             {process.intro && (
               <Reveal>
@@ -269,15 +283,16 @@ export default async function CaseStudyPage({
                 ))}
               </ol>
             )}
-            {process.images && process.images.length > 0 && (
-              <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-                {process.images.map((image, i) => (
+            {processImages.length > 0 && (
+              <ul className="mt-10 grid items-start gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                {processImages.map((image, i) => (
                   <li key={image.file}>
                     <Reveal delay={i * 0.06}>
                       <CaseStudyImage
                         slug={project.slug}
                         image={image}
-                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        maxHeight="max-h-[520px]"
                         showCaption={false}
                       />
                       {image.caption && <p className="mt-3 text-sm font-medium">{image.caption}</p>}
@@ -290,14 +305,11 @@ export default async function CaseStudyPage({
         )}
 
         {/* Before / after */}
-        {beforeAfter && (
+        {beforeAfter && beforeAfterItems.length > 0 && (
           <SplitSection label="Before & after">
             <Reveal>
               <div className="grid gap-6 sm:grid-cols-2">
-                {[
-                  { label: "Before", image: beforeAfter.before },
-                  { label: "After", image: beforeAfter.after },
-                ].map(({ label, image }) => (
+                {beforeAfterItems.map(({ label, image }) => (
                   <div key={label}>
                     <p className="mb-3 text-xs font-medium uppercase tracking-widest text-accent-text">{label}</p>
                     <CaseStudyImage
@@ -331,20 +343,28 @@ export default async function CaseStudyPage({
               </Reveal>
             )}
             <div className="flex flex-col gap-14">
-              {finalDesign.features.map((feature, i) => (
-                <Reveal key={feature.title} className="grid items-center gap-6 sm:grid-cols-2 sm:gap-12">
-                  <div className={i % 2 === 1 ? "sm:order-last" : ""}>
-                    <CaseStudyImage slug={project.slug} image={feature.image} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted">{String(i + 1).padStart(2, "0")}</p>
-                    <h3 className="mt-1 font-display text-2xl font-semibold tracking-tight">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-3 max-w-md leading-relaxed text-muted">{feature.description}</p>
-                  </div>
-                </Reveal>
-              ))}
+              {finalDesign.features.map((feature, i) => {
+                const withImage = has(feature.image);
+                return (
+                  <Reveal
+                    key={feature.title}
+                    className={withImage ? "grid items-center gap-6 sm:grid-cols-2 sm:gap-12" : ""}
+                  >
+                    {withImage && (
+                      <div className={i % 2 === 1 ? "sm:order-last" : ""}>
+                        <CaseStudyImage slug={project.slug} image={feature.image} />
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm text-muted">{String(i + 1).padStart(2, "0")}</p>
+                      <h3 className="mt-1 font-display text-2xl font-semibold tracking-tight">
+                        {feature.title}
+                      </h3>
+                      <p className="mt-3 max-w-md leading-relaxed text-muted">{feature.description}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
 
             {finalDesign.alsoIncluded && (
@@ -356,15 +376,15 @@ export default async function CaseStudyPage({
               </Reveal>
             )}
 
-            {finalDesign.screens && finalDesign.screens.length > 0 && (
-              <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {finalDesign.screens.map((screen, i) => (
+            {screens.length > 0 && (
+              <ul className="mt-8 grid grid-cols-2 items-start gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {screens.map((screen, i) => (
                   <li key={screen.file}>
                     <Reveal delay={i * 0.05}>
                       <CaseStudyImage
                         slug={project.slug}
                         image={screen}
-                        aspect="aspect-[9/16]"
+                        maxHeight="max-h-[560px]"
                         sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
                         showCaption={false}
                       />
@@ -373,6 +393,21 @@ export default async function CaseStudyPage({
                   </li>
                 ))}
               </ul>
+            )}
+
+            {showcase.length > 0 && (
+              <Reveal className={`mt-14 grid gap-6 ${showcase.length > 1 ? "lg:grid-cols-2" : ""}`}>
+                {showcase.map((image) => (
+                  <CaseStudyImage
+                    key={image.file}
+                    slug={project.slug}
+                    image={image}
+                    frame="mockup"
+                    maxHeight="max-h-[720px]"
+                    sizes={showcase.length > 1 ? "(min-width: 1024px) 40vw, 100vw" : "(min-width: 1600px) 1300px, 100vw"}
+                  />
+                ))}
+              </Reveal>
             )}
           </SplitSection>
         )}
@@ -469,11 +504,11 @@ export default async function CaseStudyPage({
                 </div>
               )}
 
-              {styleGuide.image && (
+              {styleGuideImage && (
                 <CaseStudyImage
                   slug={project.slug}
-                  image={styleGuide.image}
-                  aspect="aspect-video"
+                  image={styleGuideImage}
+                  maxHeight="max-h-[900px]"
                   sizes="(min-width: 1600px) 1300px, 100vw"
                 />
               )}

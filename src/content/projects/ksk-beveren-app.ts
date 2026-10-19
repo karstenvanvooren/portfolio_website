@@ -83,6 +83,9 @@ const kskBeverenApp: CaseStudy = {
       { file: "screen-2.png", alt: "Registration screen" },
       { file: "screen-3.png", alt: "Profile screen" },
     ],
+    showcase: [
+      { file: "mockup.png", alt: "KSK Beveren app mockup on two phones" },
+    ],
   },
 
   styleGuide: {
@@ -97,7 +100,6 @@ const kskBeverenApp: CaseStudy = {
       { role: "Body text", spec: "Inter", font: "inter", weight: 400, size: 16 },
     ],
     components: ["Custom floating tab bar", "Match cards", "News cards", "Screen headers"],
-    image: { file: "styleguide.png", alt: "KSK Beveren app style guide: colours, type and components" },
   },
 
   build: {
