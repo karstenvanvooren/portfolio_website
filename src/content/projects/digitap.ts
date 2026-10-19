@@ -9,6 +9,7 @@ const digitap: CaseStudy = {
   summary:
     "One-sentence summary of Digitap — swap in your real project description.",
   tags: ["UI Design", "Mobile"],
+  featured: true,
   cover: { label: "Digitap" },
 
   meta: {

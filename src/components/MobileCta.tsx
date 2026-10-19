@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CV_PATH } from "@/lib/site";
 
-// Sticky call-to-action bar for phones only (hidden from sm up, where the
-// header's "Let's talk" is always visible). Slides in once you've scrolled
-// past the first screen, and stays off the contact pages themselves.
+// Sticky "Let's talk / View work" bar for phones only (hidden from sm up,
+// where the header's "Let's talk" is always visible). Slides in once
+// you've scrolled past the first screen, and stays off the contact pages.
 export default function MobileCta() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
@@ -35,14 +34,13 @@ export default function MobileCta() {
         >
           Let&apos;s talk
         </Link>
-        <a
-          href={CV_PATH}
-          download
+        <Link
+          href="/work"
           tabIndex={visible ? undefined : -1}
           className="flex-1 rounded-full px-5 py-3 text-center text-sm font-medium"
         >
-          Download CV
-        </a>
+          View work
+        </Link>
       </div>
     </div>
   );

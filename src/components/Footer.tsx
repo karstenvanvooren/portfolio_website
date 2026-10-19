@@ -11,7 +11,7 @@ export default function Footer() {
             Privacy
           </Link>
         </p>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a href="mailto:karstenvanvooren@gmail.com" className="link-underline hover:text-foreground">
             Email
           </a>

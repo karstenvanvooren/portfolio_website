@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Karsten van Vooren, UX/UI Design Student looking for a UX/UI internship in semester 2 of 2026–27.",
+    "Get in touch with Karsten van Vooren, UX/UI Design Student. Open to internships, freelance work and collaborations.",
 };
 
 export default function ContactPage() {
@@ -25,7 +25,7 @@ export default function ContactPage() {
             Let&apos;s talk.
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg text-muted">
-            Looking for a UX/UI internship for semester 2 of 2026–27. Send a
+            Open to internships, freelance work and collaborations. Send a
             message below, or reach me directly.
           </p>
         </Reveal>

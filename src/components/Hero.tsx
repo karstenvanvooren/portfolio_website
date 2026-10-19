@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import DotGrid from "@/components/DotGrid";
 import ScrollCue from "@/components/ScrollCue";
-import DownloadCvButton from "@/components/DownloadCvButton";
 import Magnetic from "@/components/Magnetic";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -71,7 +70,12 @@ export default function Hero() {
               </Link>
             </Magnetic>
             <Magnetic>
-              <DownloadCvButton />
+              <Link
+                href="/contact"
+                className="inline-block rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
+              >
+                Let&apos;s talk
+              </Link>
             </Magnetic>
           </div>
         </motion.div>

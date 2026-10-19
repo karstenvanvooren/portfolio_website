@@ -49,10 +49,11 @@ const processSteps = [
       "Wireframes come first, so structure and flow get settled before any visual decisions. Then visual design, building or extending a small design system of colors, type, spacing, and components along the way, so the product feels considered rather than assembled screen by screen.",
   },
   {
-    title: "Test",
-    description: "Validate the design with real users before it's built.",
+    title: "Feedback",
+    description:
+      "Get feedback early, from teachers, classmates or users, and adjust the design.",
     details:
-      "Even informal feedback, like sitting next to someone while they try to use it, catches problems a design review never will. I'd rather find out a flow doesn't make sense here, on a Figma prototype, than after it's already built and shipped.",
+      "I show my designs before they're finished: to teachers in feedback sessions, to classmates, and to users when I can. Fresh eyes catch what I've stopped seeing, and changing a Figma screen is much cheaper than changing a built one.",
   },
   {
     title: "Build",
@@ -61,10 +62,10 @@ const processSteps = [
       "This is where the design becomes real: working code, real data, real edge cases. I try to stay close to the original design intent instead of quietly cutting corners under time pressure, and I flag it explicitly when a technical constraint means something has to change.",
   },
   {
-    title: "Ship",
-    description: "Launch, gather feedback, and iterate.",
+    title: "Reflect",
+    description: "Look back on what worked and what I'd do differently next time.",
     details:
-      "Launching isn't the finish line. It's when real usage data starts. I watch how a product actually gets used once it's live, gather feedback from real users where I can, and treat the first version as a starting point to iterate on rather than a finished product.",
+      "After a project I write down what went well, what didn't, and what I'd change. That's where I learn the most, and it's why my case studies end with a short reflection.",
   },
 ];
 
@@ -101,6 +102,7 @@ export default function Home() {
             {services.map((service, i) => (
               <Reveal key={service.title} delay={i * 0.06}>
                 <ListRow
+                  index={`0${i + 1}`}
                   title={service.title}
                   description={service.description}
                   details={service.details}

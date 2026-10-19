@@ -142,7 +142,7 @@ const kskBeverenApp: CaseStudy = {
     learned:
       "How a backend really works, from models and routes to authentication and connecting a frontend to a live API.",
     nextTime:
-      "Organise the seed data scripts in their own folder, and test the design with real supporters before building.",
+      "Put the seed scripts in their own folder.",
   },
 };
 

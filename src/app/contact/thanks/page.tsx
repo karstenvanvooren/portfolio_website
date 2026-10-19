@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Magnetic from "@/components/Magnetic";
-import DownloadCvButton from "@/components/DownloadCvButton";
 
 export const metadata: Metadata = {
   title: "Message sent",
@@ -33,7 +32,12 @@ export default function ThanksPage() {
             </Link>
           </Magnetic>
           <Magnetic>
-            <DownloadCvButton />
+            <Link
+              href="/"
+              className="inline-block rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
+            >
+              Back home
+            </Link>
           </Magnetic>
         </div>
       </div>
