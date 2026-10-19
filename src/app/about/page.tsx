@@ -2,23 +2,75 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SplitSection from "@/components/SplitSection";
+import Timeline, { type TimelineItem } from "@/components/Timeline";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
+import DownloadCvButton from "@/components/DownloadCvButton";
 import { findPublicImage } from "@/lib/findPublicImage";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Interface Design student focused on UX/UI — what I work with, and what I care about in a design.",
+    "UX/UI Design Student at AP Hogeschool Antwerpen, looking for a UX/UI internship in semester 2 of 2026–27. Education, experience, skills and languages.",
 };
+
+const education: TimelineItem[] = [
+  {
+    date: "2023–now",
+    title: "Graphic & Digital Media (Interface Design)",
+    place: "AP Hogeschool Antwerpen",
+  },
+  {
+    date: "2022–2023",
+    title: "Rehabilitation Sciences & Physiotherapy",
+    place: "University of Antwerp · not completed",
+  },
+  {
+    date: "2016–2022",
+    title: "Technical Physical Education",
+    place: "KA Beveren",
+  },
+];
+
+const experience: TimelineItem[] = [
+  {
+    date: "Oct 2023–now",
+    title: "Cashier",
+    place: "Brico Beveren",
+    description: "Customer service at the checkout and on the shop floor, handling payments.",
+  },
+  {
+    date: "Jan–Mar 2023",
+    title: "Delivery driver",
+    place: "King Ribs Beveren",
+    description: "Delivering orders on time, customer contact at the door.",
+  },
+  {
+    date: "Aug 2022",
+    title: "Production worker",
+    place: "AGFA-Gevaert",
+    description: "Summer job, working within safety and quality procedures.",
+  },
+];
 
 const skillGroups = [
   {
-    label: "Design",
-    skills: ["UI Design", "UX Research", "Design Systems", "Figma", "Illustrator"],
+    label: "UX/UI",
+    skills: ["User flows", "Wireframing", "Prototyping", "UI design", "Design systems"],
+  },
+  {
+    label: "Design tools",
+    skills: ["Figma", "Illustrator", "Photoshop", "After Effects", "InDesign", "WordPress"],
   },
   {
     label: "Development",
-    skills: ["Frontend Development", "Backend Development", "React / Next.js", "Node.js, MongoDB"],
+    skills: ["React / Next.js", "React Native / Expo", "Node.js / Express", "MongoDB"],
   },
+];
+
+const languages = [
+  { name: "Dutch", level: "Native" },
+  { name: "English", level: "Fluent" },
+  { name: "French", level: "Basic" },
 ];
 
 const values = [
@@ -44,15 +96,15 @@ export default function AboutPage() {
 
   return (
     <div className="mx-auto max-w-[1600px] px-6 py-20 sm:px-10">
-      <div className="grid gap-10 sm:grid-cols-2 sm:items-start sm:gap-16">
+      <div className="mb-16 grid gap-10 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:items-start sm:gap-16">
         <Reveal>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-ink">
+          <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl bg-ink">
             {photo ? (
               <Image
                 src={photo}
-                alt="Karsten van Vooren"
+                alt="Portrait of Karsten van Vooren"
                 fill
-                sizes="(min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 640px) 40vw, 100vw"
                 className="object-cover"
                 priority
               />
@@ -64,11 +116,6 @@ export default function AboutPage() {
                 </span>
               </>
             )}
-            <div className="absolute -right-3 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-lg bg-accent px-2 py-4 shadow-lg sm:-right-4">
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-accent-foreground [writing-mode:vertical-rl]">
-                Open to work
-              </span>
-            </div>
           </div>
         </Reveal>
 
@@ -76,63 +123,94 @@ export default function AboutPage() {
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-widest text-accent-text">About</p>
             <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-              I&apos;m an Interface Design student focusing on UX/UI.
+              I&apos;m a UX/UI Design Student studying Interface Design.
             </h1>
+            <AvailabilityBadge className="mt-6" />
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="mt-6 leading-relaxed text-muted">
-              <p>
-                Good design means much more to me than just a nice picture.
-                It&apos;s about creating clear, intuitive, and accessible
-                experiences that genuinely help the user. As an Interface
-                Design student, I work every day on finding the right balance
-                between usability, interaction, and visual design.
-              </p>
-            </div>
+            <p className="mt-6 leading-relaxed text-muted">
+              I&apos;m a creative and social designer with a passion for UX/UI
+              and web design. I love creating beautiful, user-friendly designs
+              that make a real impact. I&apos;m looking for an internship where
+              I can further develop my skills and work with driven, like-minded
+              people. I&apos;m open and direct in my communication and enjoy
+              creating designs that are clear and accessible to everyone.
+            </p>
           </Reveal>
 
           <Reveal delay={0.14}>
-            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6 sm:grid-cols-4">
+            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6 lg:grid-cols-4">
               <div>
                 <dt className="text-xs uppercase tracking-wide text-muted">Based in</dt>
                 <dd className="mt-1 text-sm font-medium">Beveren, BE</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-muted">Studying</dt>
-                <dd className="mt-1 text-sm font-medium">Interface Design</dd>
-              </div>
-              <div>
                 <dt className="text-xs uppercase tracking-wide text-muted">Focus</dt>
                 <dd className="mt-1 text-sm font-medium">UX/UI Design</dd>
               </div>
-              <div>
+              <div className="col-span-2">
+                <dt className="text-xs uppercase tracking-wide text-muted">Studying</dt>
+                <dd className="mt-1 text-sm font-medium">
+                  Graphic &amp; Digital Media (Interface Design), AP Hogeschool Antwerpen
+                </dd>
+              </div>
+              <div className="col-span-2">
                 <dt className="text-xs uppercase tracking-wide text-muted">Open to</dt>
-                <dd className="mt-1 text-sm font-medium">Freelance work</dd>
+                <dd className="mt-1 text-sm font-medium">Internship (semester 2, 2026–27)</dd>
               </div>
             </dl>
+            <DownloadCvButton className="mt-8" />
           </Reveal>
         </div>
       </div>
 
+      <SplitSection label="Education">
+        <Timeline items={education} />
+      </SplitSection>
+
+      <SplitSection label="Experience">
+        <Timeline items={experience} />
+      </SplitSection>
+
       <SplitSection label="Skills">
-        <div className="space-y-4">
+        <div className="space-y-5">
           {skillGroups.map((group) => (
-            <div key={group.label} className="flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-xs uppercase tracking-wide text-muted">
-                {group.label}
-              </span>
-              {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-border px-3 py-1.5 text-sm text-muted transition-colors hover:border-accent hover:text-foreground"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div key={group.label} className="grid gap-2 sm:grid-cols-[160px_1fr] sm:items-start sm:gap-8">
+              <h3 className="pt-1.5 text-xs uppercase tracking-wide text-muted">{group.label}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <li
+                    key={skill}
+                    className="rounded-full border border-border px-3 py-1.5 text-sm text-muted transition-colors hover:border-accent hover:text-foreground"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
+      </SplitSection>
+
+      <SplitSection label="Languages">
+        <dl className="flex max-w-xl flex-col">
+          {languages.map((language) => (
+            <div
+              key={language.name}
+              className="flex items-baseline justify-between border-b border-border py-3 last:border-b-0"
+            >
+              <dt className="font-medium">{language.name}</dt>
+              <dd className="text-sm text-muted">{language.level}</dd>
+            </div>
+          ))}
+        </dl>
+      </SplitSection>
+
+      <SplitSection label="Interests">
+        <p className="max-w-xl leading-relaxed text-muted">
+          Football &amp; futsal (18 years), gaming, music and fashion.
+        </p>
       </SplitSection>
 
       <SplitSection label="What I care about" className="pb-4">

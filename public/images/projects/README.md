@@ -1,22 +1,39 @@
-# Project cover images
+# Project images
 
-Drop each project's cover screenshot in this folder, named after its
-`slug` from `src/data/projects.ts`:
+Each project has its own folder, named after its `slug` in
+`src/content/projects/`:
 
 ```
-ksk-beveren-app.jpg
-eduvik.jpg
-voedselbank-game.jpg
-digitap.jpg
-beweeg-baai.jpg
+ksk-beveren-app/
+eduvik/
+voedselbank-game/
+digitap/
+beweeg-baai/
 ```
 
-(`.jpeg`, `.png`, or `.webp` also work.)
+## Cover
 
-Each one is picked up automatically — on the project cards (homepage and
-/work) and on that project's case study page — no code changes needed.
-Until a project's file is here, it keeps showing the orange gradient
-placeholder with the project name.
+`cover.png` (or `.jpg` / `.webp`) — the mockup shown on the project cards
+and at the top of the case study. Transparent PNGs work best: they're
+placed on the orange gradient. Export at 2400 × 1800 (4:3) or similar,
+with the device in the middle.
 
-Adding a new project later? Give it a `slug` in `projects.ts`, then drop
-an image here named `<that-slug>.jpg`.
+## Case study images
+
+Every other image is referenced by file name in the project's content
+file (`src/content/projects/<slug>.ts`). Until a file exists, the page
+shows a grey placeholder box with the expected file name, so you can see
+exactly what's still missing. The names used in `ksk-beveren-app.ts`:
+
+| File | Section |
+|---|---|
+| `sketches.png` | Process — sketches |
+| `userflow.png` | Process — user flow |
+| `lofi.png` | Process — low-fi wireframes |
+| `hifi.png` | Process — high-fi designs |
+| `feature-1.png` … `feature-4.png` | Final design — one screen per key feature |
+| `screen-1.png` … | Final design — strip with the remaining screens |
+| `styleguide.png` | Style guide |
+
+Other projects can use the same names, or any name you put in their
+content file.

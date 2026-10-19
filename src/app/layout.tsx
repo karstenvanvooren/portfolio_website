@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — Karsten van Vooren",
   },
   description:
-    "Portfolio of Karsten van Vooren, a UX/UI design student building product case studies and freelance work.",
+    "Portfolio of Karsten van Vooren, UX/UI Design Student at AP Hogeschool Antwerpen, looking for a UX/UI internship in semester 2 of 2026–27.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

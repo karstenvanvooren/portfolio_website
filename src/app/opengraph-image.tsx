@@ -5,6 +5,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const ACCENT = "#fe5e1f";
+// Darker orange for text on the light background: #fe5e1f is only 2.94:1
+// there, #bf4a11 is 4.78:1 (same pair as --accent / --accent-text).
+const ACCENT_TEXT = "#bf4a11";
 
 export default function Image() {
   return new ImageResponse(
@@ -53,7 +56,7 @@ export default function Image() {
             marginTop: 20,
             fontSize: 34,
             fontWeight: 600,
-            color: ACCENT,
+            color: ACCENT_TEXT,
           }}
         >
           UX/UI Design Student

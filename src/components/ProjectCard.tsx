@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Project } from "@/data/projects";
+import type { CaseStudy } from "@/content/projects";
 import { findPublicImage } from "@/lib/findPublicImage";
 
-export default function ProjectCard({ project }: { project: Project }) {
-  const cover = findPublicImage("images/projects", project.slug);
+export default function ProjectCard({ project }: { project: CaseStudy }) {
+  const cover = findPublicImage(`images/projects/${project.slug}`, "cover");
 
   return (
     <Link
@@ -19,7 +19,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         {cover ? (
           <Image
             src={cover}
-            alt={project.title}
+            alt={project.cover.alt ?? `${project.title} mockup`}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -38,7 +38,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           <h3 className="font-display text-lg font-semibold tracking-tight">
             {project.title}
           </h3>
-          <span className="shrink-0 text-xs text-muted">{project.year}</span>
+          <span className="shrink-0 text-xs text-muted">{project.meta.year}</span>
         </div>
         <p className="text-sm leading-relaxed text-muted">{project.summary}</p>
         <div className="mt-2 flex flex-wrap gap-2">

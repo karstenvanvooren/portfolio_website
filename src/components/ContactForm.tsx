@@ -3,13 +3,14 @@
 import { useState, type FormEvent } from "react";
 import Magnetic from "@/components/Magnetic";
 
-// Free, no-signup form backend — https://web3forms.com. This key is
-// meant to be public (it's embedded client-side by design, like a
-// mailing address), it just tells Web3Forms where to deliver the
-// message. Get your own at web3forms.com and swap it in here.
-const WEB3FORMS_ACCESS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
+// Submits to Netlify Forms. Next.js pages aren't static HTML, so the form
+// is declared in public/__forms.html (Netlify detects it there at deploy
+// time) and this component posts to that file. Form name and field names
+// must match that file. Submissions show up in Netlify under Forms.
+const FORM_NAME = "contact";
+const FORM_ENDPOINT = "/__forms.html";
 
-type Status = "idle" | "sending" | "sent" | "error" | "not-configured";
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -17,26 +18,18 @@ export default function ContactForm() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (WEB3FORMS_ACCESS_KEY === "YOUR-WEB3FORMS-ACCESS-KEY") {
-      setStatus("not-configured");
-      return;
-    }
-
     setStatus("sending");
 
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.append("access_key", WEB3FORMS_ACCESS_KEY);
-    data.append("subject", "New message from your portfolio site");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
       });
-      const result = await res.json();
-      if (result.success) {
+      if (res.ok) {
         setStatus("sent");
         form.reset();
       } else {
@@ -49,7 +42,7 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-border bg-surface px-6 py-12 text-center">
+      <div role="status" className="rounded-2xl border border-border bg-surface px-6 py-12 text-center">
         <p className="font-display text-lg font-semibold tracking-tight">Message sent.</p>
         <p className="mt-2 text-sm text-muted">
           Thanks for reaching out — I&apos;ll get back to you soon.
@@ -102,8 +95,14 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Honeypot — hidden from real visitors, catches basic spam bots */}
-      <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+      <input type="hidden" name="form-name" value={FORM_NAME} />
+      {/* Honeypot — hidden from real visitors, catches basic spam bots.
+          Declared as netlify-honeypot in public/__forms.html. */}
+      <p className="hidden">
+        <label>
+          Don&apos;t fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
 
       <div className="mt-8 flex items-center gap-4">
         <Magnetic>
@@ -116,13 +115,9 @@ export default function ContactForm() {
           </button>
         </Magnetic>
         {status === "error" && (
-          <p className="text-sm text-muted">
-            Something went wrong — try again, or email me directly below.
-          </p>
-        )}
-        {status === "not-configured" && (
-          <p className="text-sm text-muted">
-            This form isn&apos;t connected yet — email me directly below instead.
+          <p role="alert" className="text-sm text-foreground">
+            Something went wrong and your message wasn&apos;t sent. Try again,
+            or email me directly below.
           </p>
         )}
       </div>

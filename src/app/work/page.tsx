@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import SplitSection from "@/components/SplitSection";
-import { projects } from "@/data/projects";
+import { projects } from "@/content/projects";
 
 export const metadata: Metadata = {
   title: "Work",

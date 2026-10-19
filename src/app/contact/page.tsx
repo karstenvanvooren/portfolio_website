@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
 import ContactForm from "@/components/ContactForm";
+import DownloadCvButton from "@/components/DownloadCvButton";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch — open to freelance UX/UI work and collaborations.",
+    "Get in touch with Karsten van Vooren, UX/UI Design Student looking for a UX/UI internship in semester 2 of 2026–27.",
 };
 
 export default function ContactPage() {
@@ -25,8 +26,8 @@ export default function ContactPage() {
             Let&apos;s talk.
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg text-muted">
-            Open to freelance UX/UI work and collaborations. Send a message
-            below, or reach me directly.
+            Looking for a UX/UI internship for semester 2 of 2026–27. Send a
+            message below, or reach me directly.
           </p>
         </Reveal>
 
@@ -51,6 +52,9 @@ export default function ContactPage() {
               >
                 +32 479 41 05 99
               </a>
+            </Magnetic>
+            <Magnetic>
+              <DownloadCvButton size="lg" />
             </Magnetic>
           </div>
         </Reveal>

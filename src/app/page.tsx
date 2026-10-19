@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import Magnetic from "@/components/Magnetic";
 import ListRow from "@/components/ListRow";
 import SplitSection from "@/components/SplitSection";
-import { projects } from "@/data/projects";
+import { projects } from "@/content/projects";
 
 const services = [
   {
@@ -132,9 +132,12 @@ export default function Home() {
             <div className="grid gap-10 sm:grid-cols-[1.3fr_auto] sm:items-center sm:gap-16">
               <div>
                 <Reveal>
-                  <h3 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-                    Interface Design student focused on{" "}
-                    <span className="text-accent">UX/UI</span>.
+                  {/* Break after "at" so "AP Hogeschool Antwerpen." stays on
+                      one line on wide screens; narrower screens let it wrap. */}
+                  <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
+                    <span className="text-accent">UX/UI</span> Design Student at{" "}
+                    <br className="hidden xl:block" />
+                    <span className="xl:whitespace-nowrap">AP Hogeschool Antwerpen.</span>
                   </h3>
                 </Reveal>
                 <Reveal delay={0.08}>

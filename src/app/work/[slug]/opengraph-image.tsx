@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getProject } from "@/data/projects";
+import { getProject } from "@/content/projects";
 
 export const alt = "Case study";
 export const size = { width: 1200, height: 630 };

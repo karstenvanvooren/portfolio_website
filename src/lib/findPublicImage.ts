@@ -16,3 +16,10 @@ export function findPublicImage(dir: string, baseName: string): string | null {
   }
   return null;
 }
+
+// Exact-file version of the above: returns the public URL of
+// <public>/<relativePath> if that file exists, else null.
+export function findPublicFile(relativePath: string): string | null {
+  const filePath = path.join(process.cwd(), "public", relativePath);
+  return fs.existsSync(filePath) ? `/${relativePath}` : null;
+}
