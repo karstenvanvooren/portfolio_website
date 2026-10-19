@@ -43,17 +43,50 @@ export default async function CaseStudyPage({
   const next = projects[(index + 1) % projects.length];
   const cover = findPublicImage(`images/projects/${project.slug}`, "cover");
 
-  const { meta, glance, context, research, process, finalDesign, styleGuide, testing, build, reflection } =
-    project;
+  const {
+    meta,
+    links,
+    glance,
+    context,
+    research,
+    process,
+    beforeAfter,
+    finalDesign,
+    callouts,
+    styleGuide,
+    testing,
+    build,
+    reflection,
+  } = project;
 
+  // Long values get two columns so they don't squeeze into one narrow cell.
   const metaItems = [
     { label: "Role", value: meta.role },
     { label: "Year", value: meta.year },
-    { label: "Duration", value: meta.duration },
+    { label: "Duration", value: meta.duration, wide: true },
     { label: "Team", value: meta.team },
-    { label: "Type", value: meta.type },
-    { label: "Tools", value: meta.tools?.join(", ") },
-  ].filter((item): item is { label: string; value: string } => Boolean(item.value));
+    { label: "Type", value: meta.type, wide: true },
+    { label: "Tools", value: meta.tools?.join(", "), wide: true },
+    { label: "Deliverable", value: meta.deliverable, wide: true },
+  ].filter((item): item is { label: string; value: string; wide?: boolean } => Boolean(item.value));
+
+  // Short titled bullet lists that sit after a given section.
+  const renderCallouts = (after: "context" | "finalDesign") =>
+    callouts
+      ?.filter((callout) => callout.after === after)
+      .map((callout) => (
+        <SplitSection key={callout.label} label={callout.label}>
+          <Reveal>
+            <ul className="grid gap-4 sm:grid-cols-3">
+              {callout.items.map((item) => (
+                <li key={item} className="rounded-2xl border border-border p-6 leading-relaxed text-muted">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </SplitSection>
+      ));
 
   const glanceCards = [
     { label: "Challenge", text: glance?.challenge },
@@ -90,12 +123,30 @@ export default async function CaseStudyPage({
             <Reveal delay={0.18}>
               <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-3 lg:grid-cols-6">
                 {metaItems.map((item) => (
-                  <div key={item.label} className={item.label === "Tools" ? "col-span-2 sm:col-span-3 lg:col-span-2" : ""}>
+                  <div key={item.label} className={item.wide ? "col-span-2" : ""}>
                     <dt className="text-xs uppercase tracking-wide text-muted">{item.label}</dt>
                     <dd className="mt-1 text-sm font-medium">{item.value}</dd>
                   </div>
                 ))}
               </dl>
+            </Reveal>
+          )}
+          {links && links.length > 0 && (
+            <Reveal delay={0.22}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-foreground"
+                  >
+                    {link.label}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
             </Reveal>
           )}
         </div>
@@ -155,73 +206,135 @@ export default async function CaseStudyPage({
             </Reveal>
           </SplitSection>
         )}
+        {renderCallouts("context")}
 
         {/* 5. Research */}
         {research && (
           <SplitSection label="Research">
-            <Reveal className="max-w-3xl">
-              {research.intro && <p className="text-lg leading-relaxed text-muted">{research.intro}</p>}
-              <div className="mt-6 grid gap-8 sm:grid-cols-2">
-                {research.methods && research.methods.length > 0 && (
-                  <div>
-                    <h3 className="text-xs uppercase tracking-wide text-muted">Methods</h3>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {research.methods.map((method) => (
-                        <li key={method} className="rounded-full border border-border px-3 py-1.5 text-sm">
-                          {method}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {research.insights && research.insights.length > 0 && (
-                  <div>
-                    <h3 className="text-xs uppercase tracking-wide text-muted">Key insights</h3>
-                    <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-muted marker:text-accent-text">
-                      {research.insights.map((insight) => (
-                        <li key={insight}>{insight}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+            <Reveal className="flex flex-col gap-10">
+              {research.intro && (
+                <p className="max-w-2xl text-lg leading-relaxed text-muted">{research.intro}</p>
+              )}
+              {research.methods && research.methods.length > 0 && (
+                <dl className="grid max-w-4xl gap-6 sm:grid-cols-3">
+                  {research.methods.map((method) => (
+                    <div key={method.title}>
+                      <dt className="font-display text-lg font-semibold tracking-tight">{method.title}</dt>
+                      {method.description && (
+                        <dd className="mt-2 text-sm leading-relaxed text-muted">{method.description}</dd>
+                      )}
+                    </div>
+                  ))}
+                </dl>
+              )}
+              {research.insights && research.insights.length > 0 && (
+                <div>
+                  <h3 className="text-xs uppercase tracking-wide text-muted">Key insights</h3>
+                  <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+                    {research.insights.map((insight) => (
+                      <li key={insight} className="rounded-2xl bg-surface p-6 leading-relaxed">
+                        {insight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {research.image && (
+                <CaseStudyImage
+                  slug={project.slug}
+                  image={research.image}
+                  aspect="aspect-video"
+                  sizes="(min-width: 1600px) 1300px, 100vw"
+                />
+              )}
             </Reveal>
           </SplitSection>
         )}
 
-        {/* 6. Process */}
-        {process && process.steps.length > 0 && (
+        {/* 6. Process: numbered steps and/or an image strip */}
+        {process && Boolean(process.steps?.length || process.images?.length) && (
           <SplitSection label="Process">
             {process.intro && (
               <Reveal>
                 <p className="max-w-2xl text-lg leading-relaxed text-muted">{process.intro}</p>
               </Reveal>
             )}
-            <ol className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-              {process.steps.map((step, i) => (
-                <li key={step.file}>
-                  <Reveal delay={i * 0.06}>
+            {process.steps && process.steps.length > 0 && (
+              <ol className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 xl:grid-cols-4">
+                {process.steps.map((step, i) => (
+                  <li key={step.title} className="border-t border-border pt-4">
+                    <Reveal delay={Math.min(i, 4) * 0.05}>
+                      <p className="text-sm font-medium text-accent-text">{String(i + 1).padStart(2, "0")}</p>
+                      <p className="mt-1 font-medium">{step.title}</p>
+                      {step.description && (
+                        <p className="mt-1 text-sm leading-relaxed text-muted">{step.description}</p>
+                      )}
+                    </Reveal>
+                  </li>
+                ))}
+              </ol>
+            )}
+            {process.images && process.images.length > 0 && (
+              <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                {process.images.map((image, i) => (
+                  <li key={image.file}>
+                    <Reveal delay={i * 0.06}>
+                      <CaseStudyImage
+                        slug={project.slug}
+                        image={image}
+                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        showCaption={false}
+                      />
+                      {image.caption && <p className="mt-3 text-sm font-medium">{image.caption}</p>}
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </SplitSection>
+        )}
+
+        {/* Before / after */}
+        {beforeAfter && (
+          <SplitSection label="Before & after">
+            <Reveal>
+              <div className="grid gap-6 sm:grid-cols-2">
+                {[
+                  { label: "Before", image: beforeAfter.before },
+                  { label: "After", image: beforeAfter.after },
+                ].map(({ label, image }) => (
+                  <div key={label}>
+                    <p className="mb-3 text-xs font-medium uppercase tracking-widest text-accent-text">{label}</p>
                     <CaseStudyImage
                       slug={project.slug}
-                      image={step}
-                      sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      image={image}
+                      sizes="(min-width: 1024px) 40vw, 100vw"
                       showCaption={false}
                     />
-                    <p className="mt-3 text-sm">
-                      <span className="mr-2 text-muted">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="font-medium">{step.title}</span>
-                    </p>
-                    {step.caption && <p className="mt-1 text-sm text-muted">{step.caption}</p>}
-                  </Reveal>
-                </li>
-              ))}
-            </ol>
+                  </div>
+                ))}
+              </div>
+              {beforeAfter.caption && <p className="mt-4 text-sm text-muted">{beforeAfter.caption}</p>}
+            </Reveal>
           </SplitSection>
         )}
 
         {/* 7. Final design */}
-        {finalDesign && (finalDesign.features.length > 0 || finalDesign.screens?.length) && (
+        {finalDesign && Boolean(finalDesign.features.length || finalDesign.screens?.length) && (
           <SplitSection label="Final design">
+            {finalDesign.vimeoId && (
+              <Reveal className="mb-14">
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink">
+                  <iframe
+                    src={`https://player.vimeo.com/video/${finalDesign.vimeoId}?dnt=1&title=0&byline=0&portrait=0`}
+                    title={`${project.title} demo video`}
+                    allow="fullscreen; picture-in-picture"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full"
+                  />
+                </div>
+              </Reveal>
+            )}
             <div className="flex flex-col gap-14">
               {finalDesign.features.map((feature, i) => (
                 <Reveal key={feature.title} className="grid items-center gap-6 sm:grid-cols-2 sm:gap-12">
@@ -268,11 +381,19 @@ export default async function CaseStudyPage({
             )}
           </SplitSection>
         )}
+        {renderCallouts("finalDesign")}
 
         {/* 8. Style guide */}
         {styleGuide && (
           <SplitSection label="Style guide">
             <Reveal className="flex flex-col gap-10">
+              {styleGuide.description && styleGuide.description.length > 0 && (
+                <div className="max-w-2xl space-y-3 text-lg leading-relaxed text-muted">
+                  {styleGuide.description.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
               {styleGuide.colors && styleGuide.colors.length > 0 && (
                 <div>
                   <h3 className="text-xs uppercase tracking-wide text-muted">Colours</h3>

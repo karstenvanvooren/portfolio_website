@@ -77,6 +77,21 @@ export default function PrivacyPage() {
           </div>
         </SplitSection>
 
+        <SplitSection label="Embedded video">
+          <div className="max-w-2xl space-y-3 leading-relaxed text-muted">
+            <p>
+              Some case studies embed a demo video from Vimeo. It loads with
+              Vimeo&apos;s &quot;do not track&quot; setting, so Vimeo doesn&apos;t
+              set tracking cookies, but like any website it does receive your
+              IP address when the video loads. See{" "}
+              <a className={linkClass} href="https://vimeo.com/privacy" target="_blank" rel="noreferrer">
+                Vimeo&apos;s privacy policy
+              </a>
+              .
+            </p>
+          </div>
+        </SplitSection>
+
         <SplitSection label="Cookies">
           <div className="max-w-2xl space-y-3 leading-relaxed text-muted">
             <p>

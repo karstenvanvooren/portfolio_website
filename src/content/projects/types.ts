@@ -13,6 +13,16 @@ export type CaseImage = {
   caption?: string;
 };
 
+export type CaseLink = { label: string; href: string };
+
+/** A short titled list of bullets, e.g. "What I focused on". */
+export type Callout = {
+  label: string;
+  items: string[];
+  /** Which section it appears after. */
+  after: "context" | "finalDesign";
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -33,7 +43,11 @@ export type CaseStudy = {
     team?: string;
     tools?: string[];
     type?: string;
+    deliverable?: string;
   };
+
+  /** Buttons under the meta row: prototypes, demo video, code. */
+  links?: CaseLink[];
 
   /** Three cards right under the cover. */
   glance?: { challenge?: string; solution?: string; result?: string };
@@ -41,12 +55,28 @@ export type CaseStudy = {
   /** Who it's for and what the brief was. One string per paragraph. */
   context?: string[];
 
-  research?: { intro?: string; methods?: string[]; insights?: string[] };
+  research?: {
+    intro?: string;
+    methods?: { title: string; description?: string }[];
+    /** Shown as cards. */
+    insights?: string[];
+    image?: CaseImage;
+  };
 
-  /** Image strip: sketches → user flow → low-fi → high-fi. */
-  process?: { intro?: string; steps: (CaseImage & { title: string })[] };
+  process?: {
+    intro?: string;
+    /** Numbered steps (a timeline). */
+    steps?: { title: string; description?: string }[];
+    /** Image strip: e.g. sketches → user flow → low-fi → high-fi. */
+    images?: CaseImage[];
+  };
+
+  /** Old vs. new, side by side. */
+  beforeAfter?: { before: CaseImage; after: CaseImage; caption?: string };
 
   finalDesign?: {
+    /** Vimeo video ID, embedded above the features. */
+    vimeoId?: string;
     /** 2–4 key features, shown alternating left/right with a screen. */
     features: { title: string; description: string; image: CaseImage }[];
     /** One line for smaller features that don't get their own row. */
@@ -55,8 +85,12 @@ export type CaseStudy = {
     screens?: CaseImage[];
   };
 
+  callouts?: Callout[];
+
   styleGuide?: {
     colors?: { name: string; hex: string; role?: string }[];
+    /** Free text, for colours or a visual language without exact values. */
+    description?: string[];
     typography?: { name: string; usage: string }[];
     components?: string[];
     image?: CaseImage;
@@ -70,7 +104,7 @@ export type CaseStudy = {
     /** Boxes joined by arrows, left to right. */
     diagram?: string[];
     notes?: string[];
-    links?: { label: string; href: string }[];
+    links?: CaseLink[];
   };
 
   reflection?: {

@@ -1,26 +1,132 @@
 import type { CaseStudy } from "./types";
 
-// Placeholder text carried over from the previous version of the site.
-// Replace it with the real case study; see ksk-beveren-app.ts for a
-// filled-in example of most sections.
 const voedselbankGame: CaseStudy = {
   slug: "voedselbank-game",
   title: "Voedselbank Game",
   summary:
-    "One-sentence summary of the Voedselbank (food bank) game — swap in your real project description.",
-  tags: ["UI Design", "Game", "Social Impact"],
-  cover: { label: "Voedselbank Game" },
+    "A location-based mobile game about food banks for young people in Antwerp: real places in the city unlock mini-games about food waste.",
+  tags: ["Game Design", "Mobile", "Social Impact"],
+  cover: {
+    label: "Voedselbank Game",
+    alt: "Two phones showing the Voedselbank game: the city map and the Sleep Finn mini-game",
+  },
 
   meta: {
-    role: "UX/UI Designer",
+    role: "UX/UI design",
+    team: "Team of 4",
     year: "2024",
-    tools: ["Figma"],
+    duration: "About 12 weeks (late September to mid-December), in weekly sprints",
+    type: "School project (AP Hogeschool)",
+    tools: ["Figma", "Code"],
+    deliverable: "A coded mobile game with a map; mini-games start when you arrive at a location",
   },
 
   glance: {
-    challenge: "What problem or awareness goal was this game designed around?",
-    solution: "What did you design, and how does the game work?",
-    result: "What was the result — grade, feedback, or reach?",
+    challenge:
+      "Develop a location-based game in a team of four, around the theme \"food bank\". The target group was ours to choose.",
+    solution:
+      "A mobile game for young people (16–23) that takes them to real places in Antwerp, where mini-games teach them about food waste and food banks.",
+    result:
+      "A working game: the map and location triggers work, and the mini-games start on arrival. The result was good.",
+  },
+
+  context: [
+    "Young people are the biggest users of mobile games, they are often socially aware, and they respond well to gamification and interactive, educational content. That made them our target group: 16 to 23 years old.",
+    "The game's goal is awareness and education about food waste and poverty.",
+  ],
+
+  research: {
+    methods: [
+      {
+        title: "Desk research",
+        description:
+          "What a food bank does and the numbers behind it, trends in mobile games, business models, game genres, and location-based examples such as Pokémon GO, Ingress and Zombies, Run!",
+      },
+      {
+        title: "Target group",
+        description: "Research into young people and gaming, a persona and an empathy map.",
+      },
+      {
+        title: "Field research",
+        description:
+          "We visited the food bank and interviewed staff, interviewed young people from our target group, and visited and photographed possible locations in Antwerp.",
+      },
+    ],
+    insights: [
+      "Young people sometimes feel guilty when they throw food away.",
+      "They feel proud when they can contribute or help.",
+      "They already take part in collection drives at school or in their neighbourhood, and they spend a lot of time on social media.",
+    ],
+    image: { file: "research.png", alt: "Persona and empathy map of the target group" },
+  },
+
+  process: {
+    intro: "We worked in weekly sprints with scrum meetings.",
+    steps: [
+      { title: "Debriefing and mind map" },
+      { title: "Desk research, persona and empathy map" },
+      { title: "Concept and storyline" },
+      { title: "Field research and pitch" },
+      { title: "Feedback from the lecturers, concept reworked" },
+      { title: "Sketches, mid-fi wireframes and user flow" },
+      { title: "Design guide, hi-fi screens and mini-games" },
+      { title: "Code: map and location-triggered games" },
+    ],
+    images: [
+      { file: "sketches.png", caption: "Sketches", alt: "Sketches of the game screens" },
+      { file: "lofi.png", caption: "Mid-fi wireframes", alt: "Mid-fidelity wireframes" },
+      { file: "userflow.png", caption: "User flow", alt: "User flow of the game" },
+    ],
+  },
+
+  finalDesign: {
+    features: [
+      {
+        title: "City map with real locations",
+        description:
+          "Places such as Antwerp Central Station, the Grote Markt, Het Steen, the MAS and the Groenplaats become stops in the game.",
+        image: { file: "feature-1.png", alt: "Game map of Antwerp with locations as stops" },
+      },
+      {
+        title: "Mini-games on location",
+        description:
+          "When you arrive at a stop, a mini-game starts. In \"Sleep Finn\" you sort good food from spoiled food against the clock while a progress bar fills up.",
+        image: { file: "feature-2.png", alt: "The Sleep Finn mini-game with food icons and a timer" },
+      },
+      {
+        title: "A design guide built for a broad audience",
+        description:
+          "Colours, buttons and text were defined once so every screen feels like the same game and stays accessible.",
+        image: { file: "feature-3.png", alt: "Design guide with colours, buttons and text styles" },
+      },
+    ],
+  },
+
+  callouts: [
+    {
+      label: "Why it works",
+      after: "finalDesign",
+      items: [
+        "Real places in the city make the theme tangible: you play where it matters.",
+        "Short mini-games fit how young people play on mobile: quick sessions with instant feedback.",
+        "A friendly illustrated character (Finn) and clear food icons keep a heavy topic approachable.",
+      ],
+    },
+  ],
+
+  styleGuide: {
+    image: { file: "styleguide.png", alt: "Voedselbank game design guide" },
+  },
+
+  testing: {
+    paragraphs: [
+      "After our pitch, the lecturers gave feedback on the concept. We reworked it before starting the sketches and wireframes.",
+    ],
+  },
+
+  reflection: {
+    result: "The result was good.",
+    proud: "That it actually works. You walk to a location and the game starts.",
   },
 };
 

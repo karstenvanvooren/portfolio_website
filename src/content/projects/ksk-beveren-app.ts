@@ -44,11 +44,11 @@ const kskBeverenApp: CaseStudy = {
   process: {
     intro:
       "I started with desk research and a user flow, then went from low-fidelity wireframes to high-fidelity designs in Figma before building anything.",
-    steps: [
-      { file: "sketches.png", title: "Sketches", alt: "First paper sketches of the app screens" },
-      { file: "userflow.png", title: "User flow", alt: "User flow of the KSK Beveren app" },
-      { file: "lofi.png", title: "Low-fi wireframes", alt: "Low-fidelity wireframes of the main screens" },
-      { file: "hifi.png", title: "High-fi designs", alt: "High-fidelity Figma designs of the app" },
+    images: [
+      { file: "sketches.png", caption: "Sketches", alt: "First paper sketches of the app screens" },
+      { file: "userflow.png", caption: "User flow", alt: "User flow of the KSK Beveren app" },
+      { file: "lofi.png", caption: "Low-fi wireframes", alt: "Low-fidelity wireframes of the main screens" },
+      { file: "hifi.png", caption: "High-fi designs", alt: "High-fidelity Figma designs of the app" },
     ],
   },
 
