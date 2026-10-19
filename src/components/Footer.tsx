@@ -1,8 +1,16 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10">
-        <p>© {new Date().getFullYear()} Karsten van Vooren</p>
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-10 max-sm:pb-28">
+        <p>
+          © {new Date().getFullYear()} Karsten van Vooren
+          <span aria-hidden="true" className="mx-2">·</span>
+          <Link href="/privacy" className="link-underline hover:text-foreground">
+            Privacy
+          </Link>
+        </p>
         <div className="flex gap-5">
           <a href="mailto:karstenvanvooren@gmail.com" className="link-underline hover:text-foreground">
             Email

@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
+import MobileCta from "@/components/MobileCta";
+import Analytics from "@/components/Analytics";
 import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
@@ -54,6 +56,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MobileCta />
+        <Analytics />
       </body>
     </html>
   );

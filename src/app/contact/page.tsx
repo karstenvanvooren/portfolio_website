@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
 import ContactForm from "@/components/ContactForm";
-import DownloadCvButton from "@/components/DownloadCvButton";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -52,9 +51,6 @@ export default function ContactPage() {
               >
                 +32 479 41 05 99
               </a>
-            </Magnetic>
-            <Magnetic>
-              <DownloadCvButton size="lg" />
             </Magnetic>
           </div>
         </Reveal>
