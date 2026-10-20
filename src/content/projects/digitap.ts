@@ -9,6 +9,7 @@ const digitap: CaseStudy = {
   featured: true,
   cover: {
     label: "Digitap",
+    file: "mockup.png",
     alt: "Phone showing the redesigned Digitap course page with assignments",
   },
 

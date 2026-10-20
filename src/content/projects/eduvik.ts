@@ -8,6 +8,7 @@ const eduvik: CaseStudy = {
   tags: ["UI Design", "Mobile", "Gamification"],
   cover: {
     label: "Eduvik",
+    file: "mockup-laptop.png",
     alt: "Eduvik tutor app mockup showing the dashboard",
   },
 

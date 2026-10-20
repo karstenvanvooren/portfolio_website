@@ -13,10 +13,11 @@ beweeg-baai/
 
 ## Cover
 
-`cover.png` (or `.jpg` / `.webp`) — the mockup shown on the project cards
-and at the top of the case study. Transparent PNGs work best: they're
-placed on the orange gradient. Export at 2400 × 1800 (4:3) or similar,
-with the device in the middle.
+The mockup shown on the project cards and at the top of the case study.
+Every project currently names it in its content file (`cover.file`, e.g.
+`mockup.png`); without that setting, `cover.png` (or `.jpg` / `.webp`) is
+used. Transparent PNGs work best: they're placed on the orange gradient.
+Export at 2400 × 1800 (4:3) or similar, with the device in the middle.
 
 ## Case study images
 
