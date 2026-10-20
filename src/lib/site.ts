@@ -2,7 +2,7 @@
 // Used for metadataBase (so Open Graph / Twitter image URLs are absolute),
 // the sitemap, and robots.txt. NEXT_PUBLIC_SITE_URL overrides it, e.g. in
 // Netlify's environment variables, without a code change.
-const DEFAULT_SITE_URL = "https://vanvoorenkarstenporftolio.netlify.app";
+const DEFAULT_SITE_URL = "https://karstenvanvooren.com";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, "");
 
