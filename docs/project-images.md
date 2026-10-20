@@ -1,7 +1,7 @@
 # Project images
 
-Each project has its own folder, named after its `slug` in
-`src/content/projects/`:
+Each project has its own folder in `public/images/projects/`, named after
+its `slug` in `src/content/projects/`:
 
 ```
 ksk-beveren-app/
