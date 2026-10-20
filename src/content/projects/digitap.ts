@@ -1,7 +1,5 @@
 import type { CaseStudy } from "./types";
 
-const PROTOTYPE = "https://www.figma.com/proto/MSSnaNK587w5JHC3VqNupT/expert-class-ux-ui";
-
 const digitap: CaseStudy = {
   slug: "digitap",
   title: "Digitap Redesign",
@@ -22,11 +20,6 @@ const digitap: CaseStudy = {
     deliverable: "Interactive Figma prototype (3 flows)",
   },
 
-  links: [
-    { label: "View prototype – flow 1", href: `${PROTOTYPE}?node-id=518-1181` },
-    { label: "View prototype – flow 2", href: `${PROTOTYPE}?node-id=518-1182` },
-    { label: "View prototype – flow 3", href: `${PROTOTYPE}?node-id=518-1183` },
-  ],
 
   glance: {
     challenge:

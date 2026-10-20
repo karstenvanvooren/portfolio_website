@@ -23,6 +23,127 @@ function Item({ label, children, dark = false }: { label: string; children: Reac
   );
 }
 
+/* ---------- KSK Beveren ---------- */
+
+const KSK_BLUE = "#2743B2";
+const KSK_YELLOW = "#F3D02D";
+const KSK_TEXT = "#111111";
+const KSK_SURFACE = "#F5F7FB";
+
+function KskIcon({ name, className = "h-5 w-5" }: { name: "home" | "calendar" | "news" | "team" | "user"; className?: string }) {
+  const paths = {
+    home: "M4 11 12 4l8 7v9h-5v-5H9v5H4z",
+    calendar: "M5 6h14v14H5zM5 10h14M9 4v4M15 4v4",
+    news: "M5 5h11v14H5zM16 9h3v8a2 2 0 0 1-2 2M8 9h5M8 12h5M8 15h3",
+    team: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M17 14a5 5 0 0 1 4 6",
+    user: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0",
+  };
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d={paths[name]} />
+    </svg>
+  );
+}
+
+function KskTeamBadge({ code }: { code: string }) {
+  return (
+    <span
+      className="flex h-9 w-9 items-center justify-center rounded-full text-[10px] font-semibold"
+      style={{ background: "#C9D2F2", color: KSK_BLUE }}
+    >
+      {code}
+    </span>
+  );
+}
+
+function KskPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2" style={{ fontFamily: specimenFontFamily.inter, color: KSK_TEXT }}>
+      <Item label="Screen header">
+        <div
+          className="flex w-full max-w-xs items-center justify-between rounded-lg px-4 py-3.5"
+          style={{ background: KSK_BLUE }}
+        >
+          <span className="text-lg font-extrabold tracking-wide" style={{ fontFamily: specimenFontFamily.syne, color: KSK_YELLOW }}>
+            KSK Beveren
+          </span>
+          <span className="text-white">
+            <KskIcon name="user" />
+          </span>
+        </div>
+      </Item>
+
+      <Item label="Floating tab bar">
+        <div
+          className="flex w-full max-w-xs items-center justify-around rounded-full px-3 py-2 shadow-lg"
+          style={{ background: KSK_BLUE, boxShadow: "0 8px 20px rgba(39, 67, 178, 0.3)" }}
+        >
+          {(
+            [
+              ["home", "Home"],
+              ["calendar", "Matches"],
+              ["news", "News"],
+              ["team", "Team"],
+            ] as const
+          ).map(([icon, label], i) => (
+            <span
+              key={label}
+              className="flex flex-col items-center gap-0.5 text-[10px] font-medium"
+              style={{ color: i === 1 ? KSK_YELLOW : "#ffffff" }}
+            >
+              <KskIcon name={icon} />
+              {label}
+            </span>
+          ))}
+        </div>
+      </Item>
+
+      <Item label="Match card">
+        <div className="w-full max-w-xs rounded-xl p-3" style={{ background: KSK_SURFACE }}>
+          <div className="rounded-lg border bg-white px-4 py-3" style={{ borderColor: "#E3E7F0" }}>
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-medium">Nov 23 • 20:00</span>
+              <span className="rounded px-1.5 py-0.5 font-medium" style={{ background: "#FDF6D3", color: "#8A6D00" }}>
+                Home
+              </span>
+            </div>
+            <div className="mt-3 flex items-center justify-between">
+              <KskTeamBadge code="KSK" />
+              <span className="text-xs" style={{ color: "#8A8FA3" }}>
+                vs
+              </span>
+              <KskTeamBadge code="HRS" />
+            </div>
+          </div>
+        </div>
+      </Item>
+
+      <Item label="News card">
+        <div className="w-full max-w-xs rounded-xl p-3" style={{ background: KSK_SURFACE }}>
+          <div className="overflow-hidden rounded-lg border bg-white" style={{ borderColor: "#E3E7F0" }}>
+            <div
+              className="flex h-20 items-end p-2"
+              style={{ background: `linear-gradient(135deg, ${KSK_BLUE}, #3A5BD9 60%, #1B2F80)` }}
+            >
+              <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: KSK_YELLOW, color: KSK_TEXT }}>
+                Club news
+              </span>
+            </div>
+            <div className="px-3 py-2.5">
+              <p className="text-sm font-bold leading-snug" style={{ fontFamily: specimenFontFamily.syne }}>
+                Late winner seals three points at home
+              </p>
+              <p className="mt-1 text-[11px]" style={{ color: "#8A8FA3" }}>
+                Nov 24, 2025
+              </p>
+            </div>
+          </div>
+        </div>
+      </Item>
+    </div>
+  );
+}
+
 /* ---------- Digitap ---------- */
 
 const AP_RED = "#DE2F38";
@@ -298,6 +419,7 @@ function BeweegBaaiPreview() {
 }
 
 export const styleGuidePreviews: Record<string, () => ReactNode> = {
+  "ksk-beveren-app": KskPreview,
   digitap: DigitapPreview,
   eduvik: EduvikPreview,
   "voedselbank-game": VoedselbankPreview,

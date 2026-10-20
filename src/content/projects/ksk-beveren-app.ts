@@ -45,7 +45,7 @@ const kskBeverenApp: CaseStudy = {
     intro:
       "I started with desk research and a user flow, then went from low-fidelity wireframes to high-fidelity designs in Figma before building anything.",
     images: [
-      { file: "sketches.png", caption: "Sketches", alt: "First paper sketches of the app screens" },
+      { file: "sketches.jpg", caption: "Sketches", alt: "First paper sketches of the app screens" },
       { file: "userflow.png", caption: "User flow", alt: "User flow of the KSK Beveren app" },
       { file: "lofi.png", caption: "Low-fi wireframes", alt: "Low-fidelity wireframes of the main screens" },
       { file: "hifi.png", caption: "High-fi designs", alt: "High-fidelity Figma designs of the app" },
@@ -99,7 +99,7 @@ const kskBeverenApp: CaseStudy = {
       { role: "Headings", spec: "Syne", font: "syne", weight: 700, size: 32 },
       { role: "Body text", spec: "Inter", font: "inter", weight: 400, size: 16 },
     ],
-    components: ["Custom floating tab bar", "Match cards", "News cards", "Screen headers"],
+    componentPreview: true,
   },
 
   build: {
