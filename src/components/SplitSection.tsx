@@ -8,18 +8,21 @@ export default function SplitSection({
   label,
   children,
   className = "",
+  labelAs: Label = "h2",
 }: {
   label: string;
   children: ReactNode;
   className?: string;
+  /** "h1" when the label is the page's main heading (same styling). */
+  labelAs?: "h1" | "h2";
 }) {
   return (
     <div
       className={`grid gap-6 border-t border-border py-16 sm:grid-cols-[200px_1fr] sm:gap-16 ${className}`}
     >
-      <h2 className="font-display text-lg font-medium tracking-tight text-foreground sm:sticky sm:top-28 sm:self-start">
+      <Label className="font-display text-lg font-medium tracking-tight text-foreground sm:sticky sm:top-28 sm:self-start">
         {label}
-      </h2>
+      </Label>
       <div>{children}</div>
     </div>
   );
