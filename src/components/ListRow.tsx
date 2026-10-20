@@ -14,13 +14,12 @@ export default function ListRow({
   description,
   details,
 }: {
-  index?: string;
+  index: string;
   title: string;
   description: string;
   details: string;
 }) {
   const [open, setOpen] = useState(false);
-  const chip = index ?? title.slice(0, 2).toUpperCase();
 
   return (
     <div className="border-t border-border last:border-b">
@@ -38,7 +37,7 @@ export default function ListRow({
                 : "border-border text-accent-text group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"
             }`}
           >
-            {chip}
+            {index}
           </span>
           <div>
             <h3

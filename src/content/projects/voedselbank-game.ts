@@ -8,6 +8,7 @@ const voedselbankGame: CaseStudy = {
   tags: ["Game Design", "Mobile", "Social Impact"],
   cover: {
     label: "Voedselbank Game",
+    file: "mockup.png",
     alt: "Two phones showing the Voedselbank game: the city map and the Sleep Finn mini-game",
   },
 

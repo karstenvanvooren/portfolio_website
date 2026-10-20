@@ -9,6 +9,7 @@ const kskBeverenApp: CaseStudy = {
   featured: true,
   cover: {
     label: "KSK Beveren",
+    file: "mockup.png",
     alt: "Two phones showing the KSK Beveren app: the home screen with upcoming matches and the login screen",
   },
 

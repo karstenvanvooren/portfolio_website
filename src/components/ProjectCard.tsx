@@ -3,7 +3,14 @@ import Link from "next/link";
 import type { CaseStudy } from "@/content/projects";
 import { findProjectCover } from "@/lib/findPublicImage";
 
-export default function ProjectCard({ project }: { project: CaseStudy }) {
+export default function ProjectCard({
+  project,
+  headingAs: Heading = "h3",
+}: {
+  project: CaseStudy;
+  /** Heading level of the title, to fit the page's heading outline. */
+  headingAs?: "h2" | "h3";
+}) {
   const cover = findProjectCover(project);
 
   return (
@@ -35,9 +42,9 @@ export default function ProjectCard({ project }: { project: CaseStudy }) {
       </div>
       <div className="flex flex-col gap-2 p-5">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold tracking-tight">
+          <Heading className="font-display text-lg font-semibold tracking-tight">
             {project.title}
-          </h3>
+          </Heading>
           <span className="shrink-0 text-xs text-muted">{project.meta.year}</span>
         </div>
         <p className="text-sm leading-relaxed text-muted">{project.summary}</p>

@@ -35,7 +35,6 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent-2: var(--accent-2);
   --color-accent-text: var(--accent-text);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
@@ -45,11 +44,6 @@
 
 /* Scrolling is handled by Lenis (see SmoothScroll.tsx) instead of native
    CSS smooth-scroll, so the two don't fight each other. */
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-}
 
 ::selection {
   background: var(--accent);
@@ -149,8 +143,5 @@ textarea:focus {
 @media (prefers-reduced-motion: reduce) {
   .gradient-blob {
     animation: none;
-  }
-  html {
-    scroll-behavior: auto;
   }
 }

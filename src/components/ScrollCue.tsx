@@ -1,10 +1,10 @@
 // "Scroll down" button for the hero: an accent-filled circle with a gently
 // bobbing arrow. Links to the work section, so it doubles as a shortcut
 // (Lenis smooth-scrolls anchor links, see SmoothScroll.tsx).
-export default function ScrollCue({ href = "#work" }: { href?: string }) {
+export default function ScrollCue() {
   return (
     <a
-      href={href}
+      href="#work"
       aria-label="Scroll down to my work"
       className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground transition-transform duration-300 hover:scale-110 sm:h-16 sm:w-16"
     >

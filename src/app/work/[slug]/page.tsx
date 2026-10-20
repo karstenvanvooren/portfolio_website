@@ -30,6 +30,11 @@ export async function generateMetadata({
   };
 }
 
+// Small grey label above a group (e.g. "Colours", "Key insights"), and the
+// outlined pill used for tags such as tools and methods.
+const SUB_LABEL = "text-xs uppercase tracking-wide text-muted";
+const PILL = "rounded-full border border-border px-3 py-1.5 text-sm";
+
 // One template for every case study. Content comes from
 // src/content/projects/<slug>.ts; each section below only renders when the
 // project has content for it.
@@ -74,7 +79,6 @@ export default async function CaseStudyPage({
     : [];
   const screens = finalDesign?.screens?.filter(has) ?? [];
   const showcase = finalDesign?.showcase?.filter(has) ?? [];
-  const styleGuideImage = styleGuide?.image && has(styleGuide.image) ? styleGuide.image : undefined;
 
   // Long values get two columns so they don't squeeze into one narrow cell.
   const metaItems = [
@@ -135,7 +139,7 @@ export default async function CaseStudyPage({
               <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6 sm:grid-cols-3 lg:grid-cols-6">
                 {metaItems.map((item) => (
                   <div key={item.label} className={item.wide ? "col-span-2" : ""}>
-                    <dt className="text-xs uppercase tracking-wide text-muted">{item.label}</dt>
+                    <dt className={SUB_LABEL}>{item.label}</dt>
                     <dd className="mt-1 text-sm font-medium">{item.value}</dd>
                   </div>
                 ))}
@@ -233,9 +237,6 @@ export default async function CaseStudyPage({
         {research && (
           <SplitSection label="Research">
             <Reveal className="flex flex-col gap-10">
-              {research.intro && (
-                <p className="max-w-2xl text-lg leading-relaxed text-muted">{research.intro}</p>
-              )}
               {research.methods && research.methods.length > 0 && (
                 <dl className="grid max-w-4xl gap-6 sm:grid-cols-3">
                   {research.methods.map((method) => (
@@ -250,7 +251,7 @@ export default async function CaseStudyPage({
               )}
               {research.insights && research.insights.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Key insights</h3>
+                  <h3 className={SUB_LABEL}>Key insights</h3>
                   <ul className="mt-4 grid gap-4 sm:grid-cols-3">
                     {research.insights.map((insight) => (
                       <li key={insight} className="rounded-2xl bg-surface p-6 leading-relaxed">
@@ -443,7 +444,7 @@ export default async function CaseStudyPage({
             <Reveal className={`flex flex-col gap-12 ${specimenFontVariables}`}>
               {styleGuide.colors && styleGuide.colors.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Colours</h3>
+                  <h3 className={SUB_LABEL}>Colours</h3>
                   <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
                     {styleGuide.colors.map((color) => (
                       <li key={color.name}>
@@ -463,7 +464,7 @@ export default async function CaseStudyPage({
 
               {styleGuide.typography && styleGuide.typography.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Typography</h3>
+                  <h3 className={SUB_LABEL}>Typography</h3>
                   <dl className="mt-4 flex flex-col">
                     {styleGuide.typography.map((type) => (
                       <div
@@ -495,30 +496,16 @@ export default async function CaseStudyPage({
                 </div>
               )}
 
-              {styleGuide.componentPreview && styleGuidePreviews[project.slug] ? (
+              {styleGuide.componentPreview && styleGuidePreviews[project.slug] && (
                 <div>
                   <h3 className="mb-4 text-xs uppercase tracking-wide text-muted">Components</h3>
                   {styleGuidePreviews[project.slug]()}
                 </div>
-              ) : (
-                styleGuide.components &&
-                styleGuide.components.length > 0 && (
-                  <div>
-                    <h3 className="text-xs uppercase tracking-wide text-muted">Components</h3>
-                    <ul className="mt-4 flex flex-wrap gap-2">
-                      {styleGuide.components.map((component) => (
-                        <li key={component} className="rounded-full border border-border px-3 py-1.5 text-sm">
-                          {component}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
               )}
 
               {styleGuide.description && styleGuide.description.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Visual language</h3>
+                  <h3 className={SUB_LABEL}>Visual language</h3>
                   <div className="mt-3 max-w-2xl space-y-3 text-lg leading-relaxed text-muted">
                     {styleGuide.description.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
@@ -527,14 +514,6 @@ export default async function CaseStudyPage({
                 </div>
               )}
 
-              {styleGuideImage && (
-                <CaseStudyImage
-                  slug={project.slug}
-                  image={styleGuideImage}
-                  maxHeight="max-h-[900px]"
-                  sizes="(min-width: 1600px) 1300px, 100vw"
-                />
-              )}
             </Reveal>
           </SplitSection>
         )}
@@ -548,16 +527,6 @@ export default async function CaseStudyPage({
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-              {testing.changes && testing.changes.length > 0 && (
-                <>
-                  <h3 className="mt-8 text-xs uppercase tracking-wide text-muted">What changed</h3>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-muted marker:text-accent-text">
-                    {testing.changes.map((change) => (
-                      <li key={change}>{change}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
             </Reveal>
           </SplitSection>
         )}
@@ -566,8 +535,6 @@ export default async function CaseStudyPage({
         {build && (
           <SplitSection label="Build">
             <Reveal className="flex flex-col gap-10">
-              {build.intro && <p className="max-w-2xl text-lg leading-relaxed text-muted">{build.intro}</p>}
-
               {build.stack && build.stack.length > 0 && (
                 <div className="space-y-4">
                   {build.stack.map((group) => (
@@ -575,7 +542,7 @@ export default async function CaseStudyPage({
                       <h3 className="pt-1.5 text-xs uppercase tracking-wide text-muted">{group.label}</h3>
                       <ul className="flex flex-wrap gap-2">
                         {group.items.map((item) => (
-                          <li key={item} className="rounded-full border border-border px-3 py-1.5 text-sm">
+                          <li key={item} className={PILL}>
                             {item}
                           </li>
                         ))}
@@ -587,7 +554,7 @@ export default async function CaseStudyPage({
 
               {build.diagram && build.diagram.length > 0 && (
                 <div>
-                  <h3 className="text-xs uppercase tracking-wide text-muted">Architecture</h3>
+                  <h3 className={SUB_LABEL}>Architecture</h3>
                   <ol
                     aria-label={build.diagram.join(" → ")}
                     className="mt-4 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center"

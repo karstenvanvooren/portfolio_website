@@ -5,6 +5,7 @@ import Magnetic from "@/components/Magnetic";
 
 export const metadata: Metadata = {
   title: "Page not found",
+  description: "This page doesn't exist or has moved.",
 };
 
 export default function NotFound() {

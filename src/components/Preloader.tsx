@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const SPACING = 16;
 const RADIUS = 2.4;
@@ -31,15 +32,11 @@ type Dot = {
 export default function Preloader() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [visible, setVisible] = useState(true);
+  // People who prefer reduced motion skip the animation entirely.
+  const prefersReduced = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) {
-      setVisible(false);
-      return;
-    }
+    if (prefersReduced) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
@@ -155,11 +152,11 @@ export default function Preloader() {
       cancelAnimationFrame(raf);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [prefersReduced]);
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !prefersReduced && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
