@@ -5,7 +5,7 @@ import voedselbankGame from "./voedselbank-game";
 import digitap from "./digitap";
 import beweegBaai from "./beweeg-baai";
 
-export type { CaseStudy, CaseImage, SpecimenFont, TypeStyle } from "./types";
+export type { CaseStudy, CaseImage, SpecimenFont } from "./types";
 
 // One file per project in this folder; this list sets the order on /work
 // and which project the "Next project" link points to. To add a project:

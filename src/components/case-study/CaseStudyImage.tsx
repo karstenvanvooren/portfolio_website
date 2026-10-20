@@ -36,7 +36,7 @@ export default function CaseStudyImage({
   slug: string;
   image: CaseImage;
   sizes?: string;
-  frame?: "surface" | "mockup" | "none";
+  frame?: "surface" | "mockup";
   maxHeight?: string;
   showCaption?: boolean;
 }) {
@@ -44,7 +44,7 @@ export default function CaseStudyImage({
   if (!resolved) return null;
 
   const frameClass =
-    frame === "mockup" ? "mockup-bg p-6 sm:p-10" : frame === "surface" ? "bg-surface p-4 sm:p-6" : "";
+    frame === "mockup" ? "mockup-bg p-6 sm:p-10" : "bg-surface p-4 sm:p-6";
 
   return (
     <figure>

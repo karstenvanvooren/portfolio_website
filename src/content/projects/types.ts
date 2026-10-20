@@ -14,10 +14,10 @@ export type CaseImage = {
   caption?: string;
 };
 
-export type CaseLink = { label: string; href: string };
+type CaseLink = { label: string; href: string };
 
 /** A short titled list of bullets, e.g. "What I focused on". */
-export type Callout = {
+type Callout = {
   label: string;
   items: string[];
   /** Which section it appears after. */
@@ -27,7 +27,7 @@ export type Callout = {
 /** Fonts available to type specimens; see src/lib/caseStudyFonts.ts. */
 export type SpecimenFont = "inter" | "syne" | "montserrat" | "rubik" | "poppins" | "slab";
 
-export type TypeStyle = {
+type TypeStyle = {
   /** What it's used for, e.g. "Headings". */
   role: string;
   /** Human-readable spec, e.g. "Inter Black 32px". */
