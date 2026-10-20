@@ -18,13 +18,13 @@ const inter = Inter({
 
 // Self-hosted — Satoshi isn't on Google Fonts (it's distributed via
 // Fontshare), so it's downloaded once into src/fonts and loaded locally.
+// Only the weights the site uses: font-display text is always
+// font-medium (500) or font-semibold, which renders with the 700 file.
 const satoshi = localFont({
   variable: "--font-satoshi",
   src: [
-    { path: "../fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
     { path: "../fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
     { path: "../fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../fonts/Satoshi-Black.woff2", weight: "900", style: "normal" },
   ],
 });
 
