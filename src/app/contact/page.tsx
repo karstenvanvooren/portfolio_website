@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Karsten van Vooren, UX/UI Design Student. Open to internships, freelance work and collaborations.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

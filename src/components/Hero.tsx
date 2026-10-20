@@ -46,7 +46,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1, ease: easeOut }}
             className="block"
           >
-            van&nbsp;Vooren
+            van Vooren
           </motion.span>
         </h1>
 

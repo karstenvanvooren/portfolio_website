@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "UX/UI Design Student at AP Hogeschool Antwerpen, looking for a UX/UI internship in semester 2 of 2026–27. Education, experience, skills and languages.",
+  alternates: { canonical: "/about" },
 };
 
 const education: TimelineItem[] = [

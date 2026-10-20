@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Work",
   description:
     "Product design and development case studies — from early concepts to shipped apps.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {

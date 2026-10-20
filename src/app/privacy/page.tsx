@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Privacy policy",
   description:
     "How Karsten van Vooren's portfolio site handles your data: the contact form, hosting and cookieless analytics.",
+  alternates: { canonical: "/privacy" },
 };
 
 // Plain-language privacy policy (GDPR). Keep "Last updated" current when

@@ -9,6 +9,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
 import MobileCta from "@/components/MobileCta";
 import Analytics from "@/components/Analytics";
+import StructuredData from "@/components/StructuredData";
 import { SITE_URL } from "@/lib/site";
 
 const inter = Inter({
@@ -31,11 +32,11 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Karsten van Vooren - Portfolio",
-    template: "%s — Karsten van Vooren",
+    default: "Karsten van Vooren – UX/UI Designer",
+    template: "%s – Karsten van Vooren",
   },
   description:
-    "Portfolio of Karsten van Vooren, UX/UI Design Student at AP Hogeschool Antwerpen, looking for a UX/UI internship in semester 2 of 2026–27.",
+    "Portfolio of Karsten van Vooren, UX/UI design student at AP Hogeschool Antwerpen, based in Beveren. Case studies in UX/UI design and development.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <MobileCta />
         <Analytics />
+        <StructuredData />
       </body>
     </html>
   );

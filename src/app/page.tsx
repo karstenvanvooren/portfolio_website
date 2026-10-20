@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
@@ -6,6 +7,13 @@ import Magnetic from "@/components/Magnetic";
 import ListRow from "@/components/ListRow";
 import SplitSection from "@/components/SplitSection";
 import { projects } from "@/content/projects";
+
+export const metadata: Metadata = {
+  title: { absolute: "Karsten van Vooren – UX/UI Designer" },
+  description:
+    "Portfolio of Karsten van Vooren, UX/UI design student at AP Hogeschool Antwerpen, based in Beveren. Case studies in UX/UI design and development.",
+  alternates: { canonical: "/" },
+};
 
 const services = [
   {
