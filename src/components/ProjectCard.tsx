@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "@/content/projects";
-import { findPublicImage } from "@/lib/findPublicImage";
+import { findProjectCover } from "@/lib/findPublicImage";
 
 export default function ProjectCard({ project }: { project: CaseStudy }) {
-  const cover = findPublicImage(`images/projects/${project.slug}`, "cover");
+  const cover = findProjectCover(project);
 
   return (
     <Link

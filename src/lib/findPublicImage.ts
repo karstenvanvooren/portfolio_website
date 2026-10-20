@@ -23,3 +23,10 @@ export function findPublicFile(relativePath: string): string | null {
   const filePath = path.join(process.cwd(), "public", relativePath);
   return fs.existsSync(filePath) ? `/${relativePath}` : null;
 }
+
+// A project's cover image: `cover.file` from its content if set, otherwise
+// cover.(jpg|jpeg|png|webp) in public/images/projects/<slug>/.
+export function findProjectCover(project: { slug: string; cover: { file?: string } }): string | null {
+  const dir = `images/projects/${project.slug}`;
+  return project.cover.file ? findPublicFile(`${dir}/${project.cover.file}`) : findPublicImage(dir, "cover");
+}

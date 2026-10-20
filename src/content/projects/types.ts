@@ -54,8 +54,9 @@ export type CaseStudy = {
   /** Shown on the homepage "Selected work" teaser. */
   featured?: boolean;
   /** Cover mockup is cover.png (or .jpg/.webp) in the project's image
-      folder; `label` is shown on the placeholder until it exists. */
-  cover: { label: string; alt?: string };
+      folder, or `file` if set; `label` is shown on the placeholder
+      until it exists. */
+  cover: { label: string; alt?: string; file?: string };
 
   meta: {
     role?: string;
@@ -75,6 +76,8 @@ export type CaseStudy = {
 
   /** Who it's for and what the brief was. One string per paragraph. */
   context?: string[];
+  /** Image under the context text. */
+  contextImage?: CaseImage;
 
   research?: {
     intro?: string;

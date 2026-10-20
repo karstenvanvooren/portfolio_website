@@ -8,7 +8,8 @@ const beweegBaai: CaseStudy = {
   tags: ["Creative Coding", "Interaction", "Web"],
   cover: {
     label: "Beweeg Baai",
-    alt: "Beweeg Baai mockup",
+    file: "mockup.png",
+    alt: "Beweeg Baai on two screens: the start screen and the piano and violin view",
   },
 
   meta: {
@@ -19,7 +20,6 @@ const beweegBaai: CaseStudy = {
   },
 
   links: [
-    { label: "Watch the demo", href: "https://vimeo.com/1113396718" },
     { label: "Code on GitHub", href: "https://github.com/karstenvanvooren/AdemBaai" },
   ],
 
@@ -35,6 +35,12 @@ const beweegBaai: CaseStudy = {
     "This is an experiment in hand tracking and sound rather than a product for a specific audience.",
     "The project started as \"AdemBaai\", driven by breathing. Without a microphone good enough to pick up breathing reliably, I switched to hand tracking, which turned out to be more direct and more fun to play with.",
   ],
+
+  contextImage: {
+    file: "start-screen.jpg",
+    caption: "Start screen",
+    alt: "Beweeg Baai start screen: \"Welkom bij BeweegBaai\" with a button to turn on the camera",
+  },
 
   process: {
     intro:
@@ -62,18 +68,18 @@ const beweegBaai: CaseStudy = {
       {
         title: "Two instruments, one screen",
         description: "Left is piano, right is violin, using real piano and violin samples.",
-        image: { file: "feature-1.png", alt: "Playing piano on the left side of the screen" },
+        image: { file: "feature-1.jpg", alt: "Playing piano on the left side of the screen" },
       },
       {
         title: "Your hand is the pitch",
         description: "Raise or lower your hand to play higher or lower notes.",
-        image: { file: "feature-2.png", alt: "A raised hand playing a higher note" },
+        image: { file: "feature-2.jpg", alt: "A raised hand playing a higher note" },
       },
       {
         title: "A wave that responds",
         description:
           "Colour, rhythm and amplitude change with your movement, so you see what you hear.",
-        image: { file: "feature-3.png", alt: "The wave changing colour and amplitude with movement" },
+        image: { file: "feature-3.jpg", alt: "The wave changing colour and amplitude with movement" },
       },
     ],
   },

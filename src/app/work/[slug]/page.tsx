@@ -8,7 +8,7 @@ import CaseStudyImage, { caseImageExists } from "@/components/case-study/CaseStu
 import type { CaseImage } from "@/content/projects";
 import { getProject, projects } from "@/content/projects";
 import { styleGuidePreviews } from "@/components/case-study/StyleGuidePreviews";
-import { findPublicImage } from "@/lib/findPublicImage";
+import { findProjectCover } from "@/lib/findPublicImage";
 import { specimenFontFamily, specimenFontVariables } from "@/lib/caseStudyFonts";
 
 export function generateStaticParams() {
@@ -44,13 +44,14 @@ export default async function CaseStudyPage({
 
   const index = projects.findIndex((p) => p.slug === slug);
   const next = projects[(index + 1) % projects.length];
-  const cover = findPublicImage(`images/projects/${project.slug}`, "cover");
+  const cover = findProjectCover(project);
 
   const {
     meta,
     links,
     glance,
     context,
+    contextImage: contextImageRaw,
     research,
     process,
     beforeAfter,
@@ -62,6 +63,7 @@ export default async function CaseStudyPage({
   } = project;
 
   const has = (image?: CaseImage) => caseImageExists(project.slug, image);
+  const contextImage = contextImageRaw && has(contextImageRaw) ? contextImageRaw : undefined;
   const researchImage = research?.image && has(research.image) ? research.image : undefined;
   const processImages = process?.images?.filter(has) ?? [];
   const beforeAfterItems = beforeAfter
@@ -213,6 +215,16 @@ export default async function CaseStudyPage({
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </Reveal>
+            {contextImage && (
+              <Reveal className="mt-10">
+                <CaseStudyImage
+                  slug={project.slug}
+                  image={contextImage}
+                  maxHeight="max-h-[640px]"
+                  sizes="(min-width: 1600px) 1300px, 100vw"
+                />
+              </Reveal>
+            )}
           </SplitSection>
         )}
         {renderCallouts("context")}
@@ -331,15 +343,26 @@ export default async function CaseStudyPage({
           <SplitSection label="Final design">
             {finalDesign.vimeoId && (
               <Reveal className="mb-14">
+                {/* 16:9 responsive embed. dnt=1: Vimeo's "do not track", as
+                    promised on the privacy page. */}
                 <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink">
                   <iframe
-                    src={`https://player.vimeo.com/video/${finalDesign.vimeoId}?dnt=1&title=0&byline=0&portrait=0`}
+                    src={`https://player.vimeo.com/video/${finalDesign.vimeoId}?dnt=1`}
                     title={`${project.title} demo video`}
-                    allow="fullscreen; picture-in-picture"
+                    allow="autoplay; fullscreen; picture-in-picture"
                     loading="lazy"
                     className="absolute inset-0 h-full w-full"
                   />
                 </div>
+                <a
+                  href={`https://vimeo.com/${finalDesign.vimeoId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent-text"
+                >
+                  <span className="link-underline">Watch the demo on Vimeo</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
               </Reveal>
             )}
             <div className="flex flex-col gap-14">
