@@ -80,7 +80,6 @@ export type CaseStudy = {
   contextImage?: CaseImage;
 
   research?: {
-    intro?: string;
     methods?: { title: string; description?: string }[];
     /** Shown as cards. */
     insights?: string[];
@@ -119,20 +118,16 @@ export type CaseStudy = {
     colors?: { name: string; hex: string; role?: string; background?: string }[];
     /** Type specimen: each row is rendered in the real font and size. */
     typography?: TypeStyle[];
-    /** Component names as pills (used when there's no live preview). */
-    components?: string[];
     /** Render this project's live HTML/CSS component preview, from
         src/components/case-study/StyleGuidePreviews.tsx. */
     componentPreview?: boolean;
     /** "Visual language" notes, one paragraph each. */
     description?: string[];
-    image?: CaseImage;
   };
 
-  testing?: { paragraphs: string[]; changes?: string[] };
+  testing?: { paragraphs: string[] };
 
   build?: {
-    intro?: string;
     stack?: { label: string; items: string[] }[];
     /** Boxes joined by arrows, left to right. */
     diagram?: string[];

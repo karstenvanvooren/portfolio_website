@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 // A small ring that trails the pointer and grows over clickable elements.
 // Only activates for fine pointers (real mice/trackpads) — touch devices
 // keep their native behavior untouched.
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
+  const enabled = useMediaQuery("(pointer: fine)");
   const [hovering, setHovering] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -16,13 +17,8 @@ export default function CustomCursor() {
   const springX = useSpring(x, { stiffness: 500, damping: 40, mass: 0.5 });
   const springY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.5 });
 
-  const hoveringRef = useRef(false);
-  hoveringRef.current = hovering;
-
   useEffect(() => {
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    setEnabled(isFinePointer);
-    if (!isFinePointer) return;
+    if (!enabled) return;
 
     function handleMove(e: PointerEvent) {
       x.set(e.clientX);
@@ -32,7 +28,8 @@ export default function CustomCursor() {
       const isInteractive = !!target?.closest(
         'a, button, [role="button"], input, textarea, select'
       );
-      if (isInteractive !== hoveringRef.current) setHovering(isInteractive);
+      // React skips the re-render when the value doesn't change.
+      setHovering(isInteractive);
     }
 
     function handleLeave() {
@@ -45,7 +42,7 @@ export default function CustomCursor() {
       window.removeEventListener("pointermove", handleMove);
       document.documentElement.removeEventListener("mouseleave", handleLeave);
     };
-  }, [x, y]);
+  }, [enabled, x, y]);
 
   if (!enabled) return null;
 

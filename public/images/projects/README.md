@@ -34,7 +34,6 @@ an empty slot. The names used in `ksk-beveren-app.ts`:
 | `hifi.png` | Process — high-fi designs |
 | `feature-1.png` … `feature-4.png` | Final design — one screen per key feature |
 | `screen-1.png` … | Final design — strip with the remaining screens |
-| `styleguide.png` | Style guide |
 
 Other projects can use the same names, or any name you put in their
 content file.
