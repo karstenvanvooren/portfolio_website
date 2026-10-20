@@ -2,18 +2,17 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Magnetic from "@/components/Magnetic";
 
 // Submits to Netlify Forms. Next.js pages aren't static HTML, so the form
 // is declared in public/__forms.html (Netlify detects it there at deploy
 // time) and this component posts to that file. Form name and field names
-// must match that file. Submissions show up in Netlify under Forms.
-// On success, visitors go to /contact/thanks.
+// must match that file. Submissions show up in Netlify under Forms, as
+// the form named "contact".
 const FORM_NAME = "contact";
 const FORM_ENDPOINT = "/__forms.html";
 
-type Status = "idle" | "sending" | "error";
+type Status = "idle" | "sending" | "sent" | "error";
 type Field = "name" | "email" | "message";
 type Errors = Partial<Record<Field, string>>;
 
@@ -37,7 +36,6 @@ const fieldClass =
   "rounded-sm border-b bg-transparent py-2 text-sm text-foreground outline-2 outline-offset-2 transition-colors focus:border-accent-text";
 
 export default function ContactForm() {
-  const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
 
@@ -58,16 +56,27 @@ export default function ContactForm() {
       return;
     }
 
+    // URL-encoded, with form-name matching the static form so Netlify
+    // knows which form this is. bot-field is the honeypot (empty for
+    // real visitors).
+    const body = new URLSearchParams({
+      "form-name": FORM_NAME,
+      name: String(data.get("name") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      message: String(data.get("message") ?? "").trim(),
+      "bot-field": String(data.get("bot-field") ?? ""),
+    });
+
     setStatus("sending");
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        body: body.toString(),
       });
       if (!res.ok) throw new Error(`Form returned ${res.status}`);
       form.reset();
-      router.push("/contact/thanks");
+      setStatus("sent");
     } catch {
       setStatus("error");
     }
@@ -100,8 +109,17 @@ export default function ContactForm() {
     ) : null;
   }
 
+  if (status === "sent") {
+    return (
+      <div role="status" className="rounded-2xl border border-border bg-surface px-6 py-12 text-center">
+        <p className="font-display text-xl font-semibold tracking-tight">Thanks! I&apos;ll get back to you soon.</p>
+        <p className="mt-2 text-sm text-muted">Your message has been sent.</p>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} noValidate className="w-full text-left">
+    <form name={FORM_NAME} method="POST" onSubmit={handleSubmit} noValidate className="w-full text-left">
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="name" className="text-xs uppercase tracking-wide text-muted">
