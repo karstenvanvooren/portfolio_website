@@ -37,6 +37,13 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Karsten van Vooren, UX/UI design student at AP Hogeschool Antwerpen, based in Beveren. Case studies in UX/UI design and development.",
+  // No image thumbnail next to the result in Google Search. The Open Graph /
+  // Twitter images still work for link previews (LinkedIn, WhatsApp, ...).
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "none" },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

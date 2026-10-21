@@ -6,6 +6,8 @@ import Magnetic from "@/components/Magnetic";
 export const metadata: Metadata = {
   title: "Page not found",
   description: "This page doesn't exist or has moved.",
+  // Overrides the root layout's index/follow, so error pages aren't indexed.
+  robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
 };
 
 export default function NotFound() {
