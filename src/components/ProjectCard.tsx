@@ -16,7 +16,7 @@ export default function ProjectCard({
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-border bg-surface transition-shadow hover:shadow-lg hover:shadow-black/5"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-shadow hover:shadow-lg hover:shadow-black/5"
     >
       <div
         className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden ${
@@ -40,7 +40,7 @@ export default function ProjectCard({
           </>
         )}
       </div>
-      <div className="flex flex-col gap-2 p-5">
+      <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="flex items-center justify-between gap-3">
           <Heading className="font-display text-lg font-semibold tracking-tight">
             {project.title}
@@ -58,7 +58,7 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent-text">
+        <span className="mt-auto inline-flex items-center pt-3 gap-1 text-sm font-medium text-accent-text">
           View case study
           <span className="transition-transform group-hover:translate-x-1">→</span>
         </span>

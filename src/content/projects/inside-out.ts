@@ -4,11 +4,11 @@ const insideOut: CaseStudy = {
   slug: "inside-out",
   title: "Inside Out",
   summary:
-    "A mystery game through Antwerp: solve riddles, walk to real places and collect the pages of a Louise Bourgeois artwork.",
+    "A mystery game through Antwerp: solve riddles, walk to real places and collect the pages of an artwork.",
   tags: ["Game", "Web App", "UX/UI Design"],
   cover: {
     label: "Inside Out",
-    file: "mockup.png",
+    file: "mockup-2.png",
     alt: "Three phones showing the Inside Out game: the riddle chat, a new piece found and the revealed artwork",
   },
 
@@ -126,7 +126,7 @@ const insideOut: CaseStudy = {
       { file: "screen-2.png", alt: "Story card in the finale: who Louise Bourgeois is" },
       { file: "screen-3.png", alt: "Collection with the pieces and diary pages you found" },
     ],
-    showcase: [{ file: "mockup.png", alt: "Inside Out game on phones" }],
+    showcase: [{ file: "mockup-2.png", alt: "Inside Out game on phones" }],
   },
 
   callouts: [

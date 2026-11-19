@@ -97,7 +97,7 @@ export default function Home() {
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {teaserProjects.map((project, i) => (
-              <Reveal key={project.slug} delay={i * 0.08}>
+              <Reveal key={project.slug} delay={i * 0.08} className="h-full">
                 <ProjectCard project={project} />
               </Reveal>
             ))}
