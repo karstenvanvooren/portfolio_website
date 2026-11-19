@@ -4,7 +4,7 @@ const insideOut: CaseStudy = {
   slug: "inside-out",
   title: "Inside Out",
   summary:
-    "A mystery game that turns Antwerp into a book: solve riddles, walk to real places and collect torn-out pages of a Louise Bourgeois artwork, all the way to the KMSKA.",
+    "A mystery game through Antwerp: solve riddles, walk to real places and collect the pages of a Louise Bourgeois artwork.",
   tags: ["Game", "Web App", "UX/UI Design"],
   cover: {
     label: "Inside Out",
