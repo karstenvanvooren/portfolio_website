@@ -5,7 +5,7 @@ const insideOut: CaseStudy = {
   title: "Inside Out",
   summary:
     "A mystery game that turns Antwerp into a book: solve riddles, walk to real places and collect torn-out pages of a Louise Bourgeois artwork, all the way to the KMSKA.",
-  tags: ["Location-based game", "Mobile web app", "UX/UI Design"],
+  tags: ["Game", "Web App", "UX/UI Design"],
   cover: {
     label: "Inside Out",
     file: "mockup.png",
@@ -159,7 +159,7 @@ const insideOut: CaseStudy = {
         weight: 700,
         size: 36,
         sample: "Inside Out",
-        note: "Title font. Shown here in Syne Bold, the font the app falls back to.",
+        note: "A brush font, also used on the poster. Shown here in Syne Bold, as Pra Bono isn't available as a web font.",
       },
       { role: "Body text", spec: "Inter", font: "inter", weight: 400, size: 16, sample: "The city is a book." },
     ],
