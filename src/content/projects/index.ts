@@ -4,13 +4,14 @@ import eduvik from "./eduvik";
 import voedselbankGame from "./voedselbank-game";
 import digitap from "./digitap";
 import beweegBaai from "./beweeg-baai";
+import insideOut from "./inside-out";
 
 export type { CaseStudy, CaseImage, SpecimenFont } from "./types";
 
 // One file per project in this folder; this list sets the order on /work
 // and which project the "Next project" link points to. To add a project:
 // create <slug>.ts here, import it, and add it to this list.
-export const projects: CaseStudy[] = [kskBeverenApp, digitap, voedselbankGame, eduvik, beweegBaai];
+export const projects: CaseStudy[] = [kskBeverenApp, insideOut, digitap, voedselbankGame, eduvik, beweegBaai];
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
